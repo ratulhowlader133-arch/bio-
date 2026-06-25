@@ -3,99 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar | Directory</title>
+    <title>Ratul Howladar</title>
     <style>
         body {
-            background-color: #fff;
-            color: #000;
+            background-color: #ffffff; /* সাদা ব্যাকগ্রাউন্ড */
+            color: #000000;
             font-family: 'Courier New', Courier, monospace;
-            padding: 30px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 40px;
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         h1 {
-            color: #000;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            margin: 0;
-            margin-bottom: 30px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #000000;
+            white-space: nowrap; /* নাম এক লাইনে রাখবে */
         }
 
-        ul {
+        /* মেইন ট্রি কন্টেইনার */
+        .tree-container {
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .tree, .tree ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            position: relative;
         }
 
-        /* Continuous Vertical Spine for the main list */
-        ul.main-tree::before {
+        /* প্রধান লম্বালম্বি লাইন */
+        .tree {
+            position: relative;
+        }
+        .tree::before {
             content: "";
             position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
+            left: 0;
+            top: 12px;
+            bottom: 15px;
             width: 1px;
-            background: #000;
+            background-color: #000000;
         }
 
-        li {
+        .tree li {
             position: relative;
-            margin: 0;
-            padding: 0 0 10px 40px; /* Space on left for lines, plus padding-left on right */
+            padding-left: 25px;
+            margin-bottom: 15px;
         }
 
-        /* Horizontal branch from the main spine to each folder/top-level item */
-        li.folder-li::after {
+        /* ফোল্ডারগুলোর জন্য আড়াআড়ি লাইন */
+        .tree li::before {
             content: "";
             position: absolute;
-            left: -20px; /* Origin from main spine */
-            top: 10px; /* Align with folder text top */
+            left: 0;
+            top: 14px;
             width: 20px;
             height: 1px;
-            background: #000;
+            background-color: #000000;
         }
 
-        /* Nested list padding */
-        ul ul {
-            padding-left: 20px; /* Space on the left for the nested L bracket */
+        /* সাব-লিস্ট বা ভেতরের ফাইলগুলোর পজিশন */
+        .tree ul {
+            position: relative;
+            margin-top: 5px;
+            padding-left: 5px;
         }
 
-        /* Small nested L-bracket connector for nested items */
-        ul ul li::after {
+        .tree ul li {
+            padding-left: 25px;
+            margin-bottom: 5px;
+        }
+
+        /* ভেতরের ফাইলের জন্য L-শেপ লাইন */
+        .tree ul li::before {
             content: "";
             position: absolute;
-            left: -15px;
+            left: 0;
             top: -10px;
-            width: 15px;
-            height: 20px;
-            border-left: 1px solid #000;
-            border-bottom: 1px solid #000;
+            width: 18px;
+            height: 24px;
+            border-left: 1px solid #000000;
+            border-bottom: 1px solid #000000;
         }
 
-        /* Styling for folder links */
-        a.folder-link {
-            color: blue;
-            font-weight: bold;
+        /* ফোল্ডার লিঙ্কের কালার (নীল) */
+        .folder-link {
+            color: #0000ff;
             text-decoration: underline;
+            font-weight: bold;
         }
 
-        /* Styling for file links (nested) */
-        ul ul a.file-link {
-            color: green;
-            font-weight: bold;
+        /* ফাইল লিঙ্কের কালার (সবুজ) */
+        .file-link {
+            color: #008000;
             text-decoration: none;
-        }
-        
-        ul ul a.file-link:hover {
-            text-decoration: underline;
+            font-weight: bold;
         }
 
-        /* Space after folder name before its sub-links */
-        .folder-li > a.folder-link {
-            margin-bottom: 10px;
-            display: inline-block;
+        .file-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -103,37 +113,47 @@
 
     <h1>Ratul Howladar</h1>
 
-    <ul class="main-tree">
-        <li class="folder-li"><a href="#" class="folder-link">about</a>
-            <ul>
-                <li><a href="#" class="file-link">intro.txt</a></li>
-            </ul>
-        </li>
-        <li class="folder-li"><a href="#" class="folder-link">social_media</a>
-            <ul>
-                <li><a href="#" class="file-link">instagram.txt</a></li>
-                <li><a href="#" class="file-link">linkedin.txt</a></li>
-            </ul>
-        </li>
-        <li class="folder-li"><a href="#" class="folder-link">education</a>
-            <ul>
-                <li><a href="#" class="file-link">degree.txt</a></li>
-            </ul>
-        </li>
-        <li class="folder-li"><a href="#" class="folder-link">music</a>
-            <ul>
-                <li><a href="#" class="file-link">genres.txt</a></li>
-                <li><a href="#" class="file-link">artists.txt</a></li>
-                <li><a href="#" class="file-link">tracks.txt</a></li>
-            </ul>
-        </li>
-        <li class="folder-li"><a href="#" class="folder-link">ai_projects</a></li>
-        <li class="folder-li"><a href="#" class="folder-link">contact</a>
-            <ul>
-                <li><a href="#" class="file-link">details.txt</a></li>
-            </ul>
-        </li>
-    </ul>
+    <div class="tree-container">
+        <ul class="tree">
+            <li>
+                <a href="about.html" class="folder-link">about</a>
+                <ul>
+                    <li><a href="about.html" class="file-link">intro.txt</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="social_media.html" class="folder-link">social_media</a>
+                <ul>
+                    <li><a href="social_media.html" class="file-link">facebook.txt</a></li>
+                    <li><a href="social_media.html" class="file-link">instagram.txt</a></li>
+                    <li><a href="social_media.html" class="file-link">linkedin.txt</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="education.html" class="folder-link">education</a>
+                <ul>
+                    <li><a href="education.html" class="file-link">degree.txt</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="music.html" class="folder-link">music</a>
+                <ul>
+                    <li><a href="music.html" class="file-link">genres.txt</a></li>
+                    <li><a href="music.html" class="file-link">artists.txt</a></li>
+                    <li><a href="music.html" class="file-link">tracks.txt</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ai_projects.html" class="folder-link">ai_projects</a>
+            </li>
+            <li>
+                <a href="contact.html" class="folder-link">contact</a>
+                <ul>
+                    <li><a href="contact.html" class="file-link">details.txt</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
 </body>
 </html>
