@@ -22,7 +22,7 @@
             z-index: 1;
         }
 
-        /* হোয়াইট অ্যান্ড ব্ল্যাক গথিক এসভিজি ওয়াটারমার্ক */
+        /* হোয়াইট অ্যান্ড ব্ল্যাক গথিক এসভিজি ওয়াটারমার্ক ব্যাকগ্রাউন্ডেই থাকবে */
         .gothic-watermark {
             position: fixed;
             top: 50%;
@@ -31,7 +31,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            opacity: 0.04; /* হালকা সাদা আভা যা ডার্ক মোডে গথিক লুক দেবে */
+            opacity: 0.04; /* হালকা সাদা আভা */
             pointer-events: none;
             user-select: none;
         }
@@ -53,10 +53,10 @@
             margin-bottom: 45px;
         }
 
-        /* প্রো কোডার টার্মিনাল ডিরেক্টরি ট্রি স্টাইল */
+        /* হেভি অপশন নেস্টেড ডিরেক্টরি ট্রি স্ট্রাকচার */
         .tree-container {
             margin: 30px 0 50px 0;
-            line-height: 2;
+            line-height: 1.9;
         }
 
         .tree-root {
@@ -65,47 +65,56 @@
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .tree-line {
-            margin-bottom: 10px;
-            white-space: nowrap; /* লাইন যাতে মাঝখান থেকে ভেঙে না যায় */
+            margin-bottom: 6px;
+            font-family: monospace;
+            white-space: nowrap;
         }
 
         .tree-char {
             color: #555555;
-            font-family: monospace; /* টার্মিনাল ডিরেক্টরি ক্যারেক্টার ফন্ট */
-            letter-spacing: 2px;
+            font-family: monospace;
+            letter-spacing: 1px;
             font-weight: bold;
-            display: inline-block;
+        }
+
+        .tree-folder {
+            color: #888888;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 18px;
         }
 
         a {
             color: #4da6ff; /* অ্যাসথেটিক ব্লু */
             text-decoration: underline;
+            font-family: 'Georgia', serif;
+            font-size: 20px;
         }
 
         a:hover {
             color: #80bfff;
         }
 
-        /* বটম গথিক সিগনেচার */
-        .gothic-separator {
+        /* ক্লিন মিনিমাল সেপারেটর (ফালতু গথিক চিহ্ন রিমুভড) */
+        .separator {
             text-align: center;
             margin-top: 50px;
             color: #444444;
-            font-size: 22px;
-            letter-spacing: 12px;
-            font-family: monospace;
-            user-select: none;
+            letter-spacing: 5px;
         }
 
         /* রেসপনসিভ জুম প্রোটেকশন */
         @media (max-width: 600px) {
             body {
                 padding: 60px 20px;
+                font-size: 19px;
+            }
+            .tree-line a {
                 font-size: 19px;
             }
         }
@@ -127,33 +136,26 @@
     <h1>Ratul Howladar</h1>
     <div class="subtitle">personal directory / v1.0</div>
 
-    <!-- লিজেন্ডারি টার্মিনাল ডিরেক্টরি ট্রি স্ট্রাকচার -->
+    <!-- মাল্টি-লেভেল হেভি ডিরেক্টরি ট্রি -->
     <div class="tree-container">
-        <span class="tree-root">root@ratul_howladar:~# tree</span>
+        <span class="tree-root">root@ratul_howladar:~# tree --dirsfirst</span>
         
-        <div class="tree-line">
-            <span class="tree-char">├──</span> <a href="about.html">about / identity</a>
-        </div>
+        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">core/</span></div>
+        <div class="tree-line"><span class="tree-char">│   └── </span><a href="about.html">about / identity</a></div>
         
-        <div class="tree-line">
-            <span class="tree-char">├──</span> <a href="social_media.html">socials / network</a>
-        </div>
+        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">connect/</span></div>
+        <div class="tree-line"><span class="tree-char">│   └── </span><a href="social_media.html">socials / network</a></div>
         
-        <div class="tree-line">
-            <span class="tree-char">├──</span> <a href="education.html">education / timeline</a>
-        </div>
+        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">archive/</span></div>
+        <div class="tree-line"><span class="tree-char">│   └── </span><a href="education.html">education / timeline</a></div>
         
-        <div class="tree-line">
-            <span class="tree-char">├──</span> <a href="music.html">music / auditory</a>
-        </div>
-        
-        <div class="tree-line">
-            <span class="tree-char">└──</span> <a href="ai_projects.html">ai_projects / neural_labs</a>
-        </div>
+        <div class="tree-line"><span class="tree-char">└── </span><span class="tree-folder">workspace/</span></div>
+        <div class="tree-line"><span class="tree-char">    ├── </span><a href="music.html">music / auditory</a></div>
+        <div class="tree-line"><span class="tree-char">    └── </span><a href="ai_projects.html">ai_projects / labs</a></div>
     </div>
 
-    <!-- গথিক সিগনেচার সাইন -->
-    <div class="gothic-separator">⸸ ✞ ☠ ✞ ⸸</div>
+    <!-- গথিক চিহ্ন বা স্কাল ছাড়া ক্লিন এন্ডিং -->
+    <div class="separator">***</div>
 
 </body>
 </html>
