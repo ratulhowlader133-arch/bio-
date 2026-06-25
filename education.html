@@ -1,9 +1,129 @@
-<body style="background:#000; color:#00ffff; font-family:'Courier New'; padding:20px;">
-<pre>
-Education:
-├── Dhaka Commerce College (Business Studies)
-└── Ahsania Mission School & College
-    └── When I was in my school: Science group
-<a style="color:#00ffff;" href="index.html">← Back</a>
-</pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratul Howladar - Education</title>
+    <style>
+        body {
+            background-color: #000000; /* পিচ ব্ল্যাক */
+            color: #e0e0e0; 
+            font-family: 'Georgia', serif; 
+            padding: 60px 25px;
+            max-width: 460px; /* লাইন লেন্থ লক যাতে ডানে বেশি না ছড়ায় */
+            margin: 0 auto;
+            line-height: 1.8; 
+            font-size: 20px; /* জুম ফিক্সড - একদম স্পষ্ট ও বড় দেখাবে */
+        }
+        
+        h1 {
+            font-size: 24px; 
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 35px;
+        }
+        
+        h1 a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .section-title {
+            font-size: 15px;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        /* প্রো কোডার টাইমলাইন লেআউট */
+        .edu-timeline {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 45px 0;
+        }
+
+        .edu-timeline li {
+            margin-bottom: 35px; /* প্যারাগ্রাফগুলোর মাঝে গ্যাপ */
+        }
+
+        .status-tag {
+            font-size: 13px;
+            color: #666666;
+            display: block;
+            font-family: monospace; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        a {
+            color: #4da6ff; /* প্রিমিয়াম অ্যাসথেটিক ব্লু */
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #80bfff;
+        }
+
+        /* ডেসক্রিপশনের জন্য অ্যাসথেটিক সাব-টেক্সট */
+        .edu-desc {
+            font-size: 17px;
+            color: #aaaaaa;
+            line-height: 1.5;
+            margin-top: 6px;
+        }
+        
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .separator {
+            text-align: center;
+            margin-top: 40px;
+            color: #444444;
+            letter-spacing: 5px;
+        }
+
+        /* রেসপনসিভ জুম প্রোটেকশন */
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 20px;
+                font-size: 19px; 
+            }
+            .edu-desc {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1><a href="index.html">Ratul Howladar</a></h1>
+
+    <div class="section-title">journey / education</div>
+
+    <ul class="edu-timeline">
+        <li>
+            <span class="status-tag">college / commerce</span>
+            <a href="https://www.dcc.edu.bd/" target="_blank">Dhaka Commerce College</a>
+            <div class="edu-desc">
+                Chose Commerce here because of a growing interest in modern business and entrepreneurship.
+            </div>
+        </li>
+        <li>
+            <span class="status-tag">school / science</span>
+            <a href="https://www.ahmsc.edu.bd/" target="_blank">Ahsania Mission School & College</a>
+            <div class="edu-desc">
+                My school days, where I completed my studies under the Science group.
+            </div>
+        </li>
+    </ul>
+
+    <a href="index.html" class="back-link">← Back</a>
+
+    <div class="separator">***</div>
+
 </body>
+</html>
