@@ -3,69 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar</title>
+    <title>Ratul Howladar | Directory</title>
     <style>
         body {
-            background-color: #00ff00; /* সবুজ ব্যাকগ্রাউন্ড */
-            color: #000000;
+            background-color: #fff;
+            color: #000;
             font-family: 'Courier New', Courier, monospace;
-            padding: 20px;
+            padding: 30px;
             font-size: 16px;
+            font-weight: bold;
         }
 
         h1 {
-            font-size: 24px; /* মোবাইলের জন্য সাইজ কমানো হয়েছে */
-            margin-bottom: 20px;
-            white-space: nowrap; /* নাম যাতে এক লাইনেই থাকে */
+            color: #000;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 30px;
         }
 
-        /* ট্রি-স্ট্রাকচার ডিজাইন */
-        .tree {
+        ul {
             list-style-type: none;
-            padding-left: 0;
-        }
-
-        .tree li {
+            margin: 0;
+            padding: 0;
             position: relative;
-            padding-left: 25px;
-            margin: 5px 0;
-            color: #00008b; /* গাঢ় নীল */
         }
 
-        /* লম্বালম্বি লাইন এবং এরো */
-        .tree::before {
+        /* Continuous Vertical Spine for the main list */
+        ul.main-tree::before {
             content: "";
             position: absolute;
-            left: 28px;
-            top: 60px;
-            bottom: 20px;
+            left: 20px;
+            top: 0;
+            bottom: 0;
             width: 1px;
-            background: #000000;
+            background: #000;
         }
 
-        .tree li::before {
-            content: "└── ";
+        li {
+            position: relative;
+            margin: 0;
+            padding: 0 0 10px 40px; /* Space on left for lines, plus padding-left on right */
+        }
+
+        /* Horizontal branch from the main spine to each folder/top-level item */
+        li.folder-li::after {
+            content: "";
             position: absolute;
-            left: 0;
+            left: -20px; /* Origin from main spine */
+            top: 10px; /* Align with folder text top */
+            width: 20px;
+            height: 1px;
+            background: #000;
         }
 
-        a {
-            color: #00008b;
-            text-decoration: none;
+        /* Nested list padding */
+        ul ul {
+            padding-left: 20px; /* Space on the left for the nested L bracket */
+        }
+
+        /* Small nested L-bracket connector for nested items */
+        ul ul li::after {
+            content: "";
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            width: 15px;
+            height: 20px;
+            border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* Styling for folder links */
+        a.folder-link {
+            color: blue;
             font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Styling for file links (nested) */
+        ul ul a.file-link {
+            color: green;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        ul ul a.file-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Space after folder name before its sub-links */
+        .folder-li > a.folder-link {
+            margin-bottom: 10px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
     <h1>Ratul Howladar</h1>
-    <ul class="tree">
-        <li><a href="about.html">about</a></li>
-        <li><a href="social_media.html">social_media</a></li>
-        <li><a href="education.html">education</a></li>
-        <li><a href="music.html">music</a></li>
-        <li><a href="ai_projects.html">ai_projects</a></li>
-        <li><a href="contact.html">contact</a></li>
+
+    <ul class="main-tree">
+        <li class="folder-li"><a href="#" class="folder-link">about</a>
+            <ul>
+                <li><a href="#" class="file-link">intro.txt</a></li>
+            </ul>
+        </li>
+        <li class="folder-li"><a href="#" class="folder-link">social_media</a>
+            <ul>
+                <li><a href="#" class="file-link">instagram.txt</a></li>
+                <li><a href="#" class="file-link">linkedin.txt</a></li>
+            </ul>
+        </li>
+        <li class="folder-li"><a href="#" class="folder-link">education</a>
+            <ul>
+                <li><a href="#" class="file-link">degree.txt</a></li>
+            </ul>
+        </li>
+        <li class="folder-li"><a href="#" class="folder-link">music</a>
+            <ul>
+                <li><a href="#" class="file-link">genres.txt</a></li>
+                <li><a href="#" class="file-link">artists.txt</a></li>
+                <li><a href="#" class="file-link">tracks.txt</a></li>
+            </ul>
+        </li>
+        <li class="folder-li"><a href="#" class="folder-link">ai_projects</a></li>
+        <li class="folder-li"><a href="#" class="folder-link">contact</a>
+            <ul>
+                <li><a href="#" class="file-link">details.txt</a></li>
+            </ul>
+        </li>
     </ul>
 
 </body>
