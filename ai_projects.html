@@ -3,49 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar - Neural Core</title>
+    <title>Ratul Howladar - AI Labs</title>
     <style>
         body {
-            background-color: #000000; /* অবসিডিয়ান ব্ল্যাক */
-            color: #d1d1d1; 
-            font-family: 'Courier New', Courier, monospace; /* পিওর কোডার মোনোস্পেস ফন্ট */
+            /* এআই ভাইব দেওয়ার জন্য ডিপ ভায়োলেট ও সায়ান-ব্লু মিক্সড কালার গ্রেডিয়েন্ট */
+            background: radial-gradient(circle at top right, #1f003d, transparent 55%),
+                        radial-gradient(circle at bottom left, #002244, transparent 55%),
+                        #000000;
+            background-attachment: fixed;
+            color: #e2e2e2; 
+            font-family: 'Georgia', serif; 
             padding: 60px 25px;
-            max-width: 460px; /* লাইন লেন্থ লক, এক লাইনে বেশি লেখা ছড়াবে না */
+            max-width: 440px; /* লাইন লেন্থ লক যাতে এক লাইনে বেশি লেখা না ছড়ায় */
             margin: 0 auto;
             line-height: 1.8; 
-            font-size: 20px; /* জুম ফিক্সড - কোনো কিছু ছোট লাগবে না */
+            font-size: 20px; /* জুম ফিক্সড - লেখা স্পষ্ট আর বড় দেখাবে */
             position: relative;
-            overflow-x: hidden;
+            z-index: 1;
         }
         
-        /* ব্যাকগ্রাউন্ড ওয়াটারমার্ক ১ (ডান পাশে ভার্টিকাল টেক্সট) */
-        .watermark-vertical {
+        /* এআই নোড নেটওয়ার্ক ওয়াটারমার্ক - মিক্সড কালারে দারুণ ফুটে উঠবে */
+        .ai-net-watermark {
             position: fixed;
-            top: 15%;
-            right: 3%;
-            font-size: 65px;
-            color: #00ff66; /* ম্যাট্রিক্স গ্রিন */
-            opacity: 0.02; /* একদম হালকা যাতে লেখার ক্ষতি না হয় */
-            font-weight: 900;
-            writing-mode: vertical-rl;
-            letter-spacing: 8px;
-            user-select: none;
-            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
-        }
-
-        /* ব্যাকগ্রাউন্ড ওয়াটারমার্ক ২ (বাম পাশে বাইনারি লগ) */
-        .watermark-binary {
-            position: fixed;
-            bottom: 10%;
-            left: 3%;
-            font-size: 13px;
-            color: #00f3ff; /* সাইবার সায়ান */
-            opacity: 0.02;
-            line-height: 1.3;
-            user-select: none;
+            opacity: 0.08; /* একদম পারফেক্ট ভিজিবিলিটি, লেখার ক্ষতি করবে না */
             pointer-events: none;
-            z-index: -1;
+            user-select: none;
         }
         
         h1 {
@@ -62,63 +50,33 @@
 
         .section-title {
             font-size: 15px;
-            color: #00ff66; /* সাইবার গ্রিন অ্যাকসেন্ট */
+            color: #aaaaaa;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
         }
 
-        /* সাইবার প্রজেক্ট লগ লেআউট */
-        .project-log {
-            list-style-type: none;
-            padding: 0;
-            margin: 0 0 45px 0;
+        p {
+            margin-bottom: 22px;
+            color: #dddddd;
         }
 
-        .project-log li {
-            margin-bottom: 35px;
-        }
-
-        .status-tag {
-            font-size: 13px;
-            color: #555555;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-
-        .project-title {
-            color: #ffffff;
-            font-weight: bold;
-            display: block;
-            font-size: 21px;
-        }
-
-        .project-desc {
-            font-size: 17px;
-            color: #999999;
-            line-height: 1.6;
-            margin-top: 6px;
-        }
-
-        a.back-btn {
-            color: #00f3ff; /* ইলেকট্রিক সায়ান লিঙ্ক */
+        a.back-link {
+            color: #4da6ff; /* অ্যাসথেটিক ব্লু লিঙ্ক */
             text-decoration: underline;
+            display: inline-block;
+            margin-top: 25px;
         }
 
-        a.back-btn:hover {
-            color: #80f7ff;
+        a.back-link:hover {
+            color: #80bfff;
         }
 
-        /* গথিক ডার্ক সিগনেচার চিহ্ন */
-        .gothic-separator {
+        .separator {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 45px;
             color: #444444;
-            font-size: 22px;
-            letter-spacing: 12px;
-            user-select: none;
+            letter-spacing: 5px;
         }
 
         /* রেসপনসিভ জুম প্রোটেকশন */
@@ -127,50 +85,42 @@
                 padding: 40px 20px;
                 font-size: 19px; 
             }
-            .project-desc {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ওয়াটারমার্ক এলিমেন্টস -->
-    <div class="watermark-vertical">NEURAL_CORE</div>
-    <div class="watermark-binary">01010101<br>11001100<br>00111100<br>SYSTEM_OK</div>
+    <div class="ai-net-watermark">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20%" y1="25%" x2="50%" y2="45%" stroke="#00f3ff" stroke-width="1.5" />
+            <line x1="50%" y1="45%" x2="80%" y2="30%" stroke="#00ff66" stroke-width="1.5" />
+            <line x1="50%" y1="45%" x2="40%" y2="75%" stroke="#00f3ff" stroke-width="1.5" />
+            <line x1="40%" y1="75%" x2="75%" y2="80%" stroke="#00ff66" stroke-width="1.5" />
+            <line x1="20%" y1="25%" x2="40%" y2="75%" stroke="#ffffff" stroke-width="1" stroke-dasharray="5,5" />
+            
+            <circle cx="20%" cy="25%" r="6" fill="#00f3ff" />
+            <circle cx="50%" cy="45%" r="8" fill="#ffffff" />
+            <circle cx="80%" cy="30%" r="5" fill="#00ff66" />
+            <circle cx="40%" cy="75%" r="7" fill="#00f3ff" />
+            <circle cx="75%" cy="80%" r="6" fill="#00ff66" />
+        </svg>
+    </div>
 
     <h1><a href="index.html">Ratul Howladar</a></h1>
 
-    <div class="section-title">index / ai_experiments</div>
+    <div class="section-title">labs / generation</div>
 
-    <ul class="project-log">
-        <li>
-            <span class="status-tag">[ pipeline / active ]</span>
-            <span class="project-title">Kling & Seedance</span>
-            <div class="project-desc">
-                Deploying and tracking updates in next-gen neural video generation models and creative asset suites.
-            </div>
-        </li>
-        <li>
-            <span class="status-tag">[ prompt_eng / stable ]</span>
-            <span class="project-title">GPT Image 2 / Diffusion</span>
-            <div class="project-desc">
-                Synthesizing high-resolution fashion photography portraits using advanced diffusion physics and custom lens simulations.
-            </div>
-        </li>
-        <li>
-            <span class="status-tag">[ automation / build ]</span>
-            <span class="project-title">Nano Banana Node</span>
-            <div class="project-desc">
-                Experimenting with rapid script automation workflows for quick content deployment and rendering.
-            </div>
-        </li>
-    </ul>
+    <p>
+        Currently diving deep into the world of generative media and synthetic workflows.
+    </p>
 
-    <a href="index.html" class="back-btn">← Back</a>
+    <p>
+        Focused on mastering image generating first, then moving into video. 
+    </p>
 
-    <!-- গথিক সিগনেচার অক্ষত রাখা হলো -->
-    <div class="gothic-separator">⸸ ✞ ☠ ✞ ⸸</div>
+    <a href="index.html" class="back-link">← Back</a>
+
+    <div class="separator">***</div>
 
 </body>
 </html>
