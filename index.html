@@ -3,46 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Ratul Howladar</title>
     <style>
         body {
-            background-color: #00ff00; /* ব্যাকগ্রাউন্ড সবুজ */
+            background-color: #00ff00; /* সবুজ ব্যাকগ্রাউন্ড */
+            color: #000000;
             font-family: 'Courier New', Courier, monospace;
-            padding: 50px;
-            line-height: 2;
-            font-size: 20px;
+            padding: 20px;
+            font-size: 16px;
         }
-        
-        /* আপনার নাম কালো রঙের */
+
         h1 {
-            color: #000000; 
-            font-weight: bold;
+            font-size: 24px; /* মোবাইলের জন্য সাইজ কমানো হয়েছে */
+            margin-bottom: 20px;
+            white-space: nowrap; /* নাম যাতে এক লাইনেই থাকে */
         }
 
-        /* লিঙ্কগুলোর কালার আলাদা (গাঢ় নীল) */
-        a {
-            color: #00008b; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-
+        /* ট্রি-স্ট্রাকচার ডিজাইন */
         .tree {
             list-style-type: none;
             padding-left: 0;
-            color: #00008b; /* ট্রি চিহ্নের কালার */
         }
-        
+
         .tree li {
             position: relative;
-            padding-left: 20px;
+            padding-left: 25px;
+            margin: 5px 0;
+            color: #00008b; /* গাঢ় নীল */
         }
-        
+
+        /* লম্বালম্বি লাইন এবং এরো */
+        .tree::before {
+            content: "";
+            position: absolute;
+            left: 28px;
+            top: 60px;
+            bottom: 20px;
+            width: 1px;
+            background: #000000;
+        }
+
         .tree li::before {
             content: "└── ";
+            position: absolute;
+            left: 0;
+        }
+
+        a {
+            color: #00008b;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
