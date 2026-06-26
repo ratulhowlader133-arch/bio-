@@ -77,7 +77,7 @@
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 1px solid rgba(0, 243, 255, 0.4); /* সাইবার গ্লো */
+            border-top: 1px solid rgba(0, 243, 255, 0.3); /* নরমাল অবস্হায় হালকা সায়ান বর্ডার */
             border-radius: 24px;
             padding: 45px 30px;
             display: flex;
@@ -90,7 +90,7 @@
             position: relative;
             transform-style: preserve-3d;
             box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             
             /* অ্যান্টি-গ্র্যাভিটি লেভিটেশন */
             animation: antiGravity 7s ease-in-out infinite;
@@ -108,12 +108,16 @@
             50% { transform: translateY(-25px) rotateX(2deg); }
         }
 
-        /* কার্ড হোভার: ৩ডি পপ-আউট */
-        .cyber-card:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+        /* 🔥 গড-লেভেল নিয়ন গ্লো ইফেক্ট (মাউস হোভার এবং মোবাইল টাচ/অ্যাক্টিভ দুইটার জন্যই) */
+        .cyber-card:hover, .cyber-card:active {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-color: rgba(0, 243, 255, 0.6);
             border-top: 1px solid #00f3ff;
-            border-right: 1px solid rgba(0, 243, 255, 0.2);
-            box-shadow: 0 40px 80px rgba(0, 243, 255, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            /* মাল্টি-লেয়ার নিয়ন গ্লো শ্যাডো */
+            box-shadow: 0 40px 80px rgba(0, 0, 243, 0.15), 
+                        0 0 30px rgba(0, 243, 255, 0.3), 
+                        0 0 60px rgba(0, 243, 255, 0.1),
+                        inset 0 0 15px rgba(0, 243, 255, 0.1);
             transform: scale(1.04) translateZ(60px) !important; /* জুম হয়ে স্ক্রিন থেকে বেরিয়ে আসবে */
             animation-play-state: paused; /* হোভার করলে ভাসমান অ্যানিমেশন থামবে */
         }
@@ -128,13 +132,13 @@
             top: 10px; left: 20px;
             transform: translateZ(-20px);
             pointer-events: none;
-            transition: color 0.3s;
+            transition: color 0.4s;
         }
-        .cyber-card:hover .card-id {
-            color: rgba(0, 243, 255, 0.05);
+        .cyber-card:hover .card-id, .cyber-card:active .card-id {
+            color: rgba(0, 243, 255, 0.06);
         }
 
-        /* টাইপোগ্রাফি */
+        /* টাইপোগ্রাফি এবং টেক্সট গ্লো */
         .card-title {
             font-size: 22px;
             font-weight: 700;
@@ -144,6 +148,15 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transform: translateZ(30px); /* টেক্সট হাওয়ায় ভাসবে */
+            transition: all 0.4s;
+        }
+        
+        /* হোভার করলে ভেতরের টেক্সটও গ্লো করবে */
+        .cyber-card:hover .card-title, .cyber-card:active .card-title {
+            background: linear-gradient(180deg, #ffffff 0%, #00f3ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
         }
 
         .card-desc {
@@ -153,9 +166,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transform: translateZ(20px);
+            transition: color 0.4s;
+        }
+        .cyber-card:hover .card-desc, .cyber-card:active .card-desc {
+            color: #00f3ff;
         }
 
-        /* সোশ্যাল মিডিয়া হাব প্যানেল */
+        /* ওয়ার্কিং সোশ্যাল মিডিয়া প্যানেল (Connect Card) */
         .social-hub {
             display: flex;
             gap: 10px;
@@ -224,9 +241,7 @@
                 <a href="https://linkedin.com/in/ratulhowladar" target="_blank" class="social-link-btn">LinkedIn</a>
                 <a href="https://github.com/ratulhowladar" target="_blank" class="social-link-btn">GitHub</a>
                 <a href="https://instagram.com/ratulhowladar" target="_blank" class="social-link-btn">Instagram</a>
-                <!-- হোয়াটসঅ্যাপে সরাসরি চ্যাট ওপেন করতে YOUR_NUMBER এর জায়গায় কান্ট্রি কোডসহ নাম্বার দাও (যেমন: 88017xxxxxxxx) -->
                 <a href="https://wa.me/YOUR_NUMBER" target="_blank" class="social-link-btn">WhatsApp</a>
-                <!-- সরাসরি মেইল করার জন্য your.email@example.com পরিবর্তন করে তোমার মেইল দাও -->
                 <a href="mailto:your.email@example.com" class="social-link-btn">Email</a>
             </div>
         </div>
