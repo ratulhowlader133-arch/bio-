@@ -3,84 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howlader — 3D Cinematic Universe</title>
+    <title>Ratul Howlader — Infinite Space-Time Continuum</title>
     <style>
-        /* গ্লোবাল রিসেট ও সিনেমাটিক সেটআপ */
+        /* Global Minimalist Reset & Spatial Framework */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #030206;
+            background-color: #020204; /* Pure Absolute Cosmic Void */
             color: #ffffff;
-            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            perspective: 2000px; /* এক্সট্রিম থ্রিডি ডেপথ */
+            perspective: 1500px; /* Refined Real-world Focal Length */
         }
 
-        /* হাই-কোয়ালিটি ৩ডি হাইপারস্পেস ক্যানভাস */
+        /* Cinema-Grade Space Time Warp Canvas */
         canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
-            background: #020205;
+            background: #010103;
         }
 
-        /* নিয়ন রেড অ্যাম্বিয়েন্ট লাইট গ্লো */
+        /* Subtle Relativistic Lens Flare Mesh */
         .ambient-mesh {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 30, 70, 0.12) 0%, transparent 60%);
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.03) 0%, transparent 60%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* টপ ফিউচারিস্টিক বার */
+        /* Minimalist High-End HUD Navigation */
         .cyber-hud {
             position: absolute;
             top: 40px; left: 50%;
-            transform: translateX(-50%) translateZ(100px);
-            font-family: monospace;
-            font-size: 11px;
-            color: rgba(255, 30, 70, 0.9);
-            letter-spacing: 5px;
+            transform: translateX(-50%) translateZ(80px);
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 6px;
             text-transform: uppercase;
-            background: rgba(255, 30, 70, 0.05);
-            padding: 8px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 30, 70, 0.3);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(255, 30, 70, 0.2);
-            text-shadow: 0 0 8px rgba(255, 30, 70, 0.8);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             z-index: 10;
         }
 
-        /* মেইন ৩ডি ডাইনামিক গ্রিড */
+        /* Sophisticated Responsive Monolithic Layout */
         .matrix-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            gap: 40px;
             width: 90%;
             max-width: 1200px;
             transform-style: preserve-3d;
             z-index: 1;
-            padding: 120px 0 60px 0;
-            transition: transform 0.1s ease-out;
+            padding: 140px 0 80px 0;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* 🔥 প্রিমিয়াম নিয়ন ক্রিমসন রেড বডি কার্ড (যা ব্যাকগ্রাউন্ডে চমৎকার ফুটবে) */
+        /* Premium Monolithic Obsidian / Dark Titanium Cards */
         .cyber-card {
-            /* কার্ডের ভেতরের মেইন বডি কালার এখন একটি লাক্সারি ডার্ক রেড গ্রেডিয়েন্ট */
-            background: linear-gradient(135deg, rgba(230, 15, 55, 0.18) 0%, rgba(15, 3, 8, 0.85) 100%);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 30, 70, 0.25);
-            border-top: 1px solid rgba(255, 50, 90, 0.6); 
-            border-radius: 24px;
-            padding: 45px 30px;
+            /* High Contrast Solid Dark Base to isolate from Space Background */
+            background: #111216; 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -90,148 +88,134 @@
             color: #fff;
             position: relative;
             transform-style: preserve-3d;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
-                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Multi-layered shadows for massive architectural density */
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* অ্যান্টি-গ্র্যাভিটি লেভিটেশন */
-            animation: antiGravity 7s ease-in-out infinite;
+            /* Organic micro-floating motion instead of erratic waves */
+            animation: spatialDrift 8s ease-in-out infinite;
         }
 
-        /* কার্ডগুলোর মুভমেন্ট সিঙ্ক ব্রেক করা */
+        /* Asynchronous Easing Breaks */
         .c-1 { animation-delay: 0s; }
-        .c-2 { animation-delay: -3.5s; }
-        .c-3 { animation-delay: -1.8s; }
-        .c-4 { animation-delay: -5.2s; }
-        .c-5 { animation-delay: -2.5s; }
+        .c-2 { animation-delay: -3.2s; }
+        .c-3 { animation-delay: -1.6s; }
+        .c-4 { animation-delay: -4.8s; }
+        .c-5 { animation-delay: -2.4s; }
 
-        @keyframes antiGravity {
-            0%, 100% { transform: translateY(0px) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(2deg); }
+        @keyframes spatialDrift {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-12px) rotateY(1deg); }
         }
 
-        /* হোভার করলে সলিড ভাইব্রেন্ট রেড গ্লো এবং থ্রিডি পুশ এফেক্ট */
+        /* Ultra-Clean Micro-interactions on Hover */
         .cyber-card:hover, .cyber-card:active {
-            background: linear-gradient(135deg, rgba(255, 20, 60, 0.3) 0%, rgba(25, 2, 6, 0.9) 100%);
-            border-color: rgba(255, 30, 70, 0.8);
-            border-top: 1px solid #ff1e46;
-            box-shadow: 0 40px 80px rgba(255, 20, 60, 0.25), 
-                        0 0 40px rgba(255, 20, 60, 0.4), 
-                        inset 0 0 20px rgba(255, 20, 60, 0.2);
-            transform: scale(1.05) translateZ(70px) !important; 
-            animation-play-state: paused; 
+            background: #15171e;
+            border-color: rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            box-shadow: 0 60px 100px rgba(0, 0, 0, 0.95),
+                        0 0 40px rgba(255, 255, 255, 0.05);
+            transform: scale(1.03) translateZ(80px) !important;
+            animation-play-state: paused;
         }
 
-        /* ব্যাকগ্রাউন্ড ইনডেক্স নাম্বার */
+        /* Architectural Structural ID */
         .card-id {
-            font-family: monospace;
-            font-size: 70px;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.015);
+            font-family: SFMono-Regular, Consolas, monospace;
+            font-size: 50px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.02);
             position: absolute;
-            top: 10px; left: 20px;
-            transform: translateZ(-20px);
+            top: 15px; left: 25px;
+            transform: translateZ(-10px);
             pointer-events: none;
             transition: color 0.4s;
         }
         .cyber-card:hover .card-id, .cyber-card:active .card-id {
-            color: rgba(255, 30, 70, 0.05);
+            color: rgba(255, 255, 255, 0.05);
         }
 
-        /* টাইপোগ্রাফি এবং টেক্সট গ্লো */
+        /* Premium Typography Layout */
         .card-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            background: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: translateZ(30px); 
-            transition: all 0.4s;
-        }
-        
-        .cyber-card:hover .card-title, .cyber-card:active .card-title {
-            background: linear-gradient(180deg, #ffffff 0%, #ff325a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 30, 70, 0.6);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 14px;
+            color: #ffffff;
+            transform: translateZ(30px);
+            transition: color 0.3s;
         }
 
         .card-desc {
-            font-size: 13px;
-            color: #888;
-            font-family: monospace;
+            font-size: 12px;
+            color: #66666e;
+            font-family: SFMono-Regular, Consolas, monospace;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transform: translateZ(20px);
-            transition: color 0.4s;
+            transform: translateZ(15px);
+            transition: color 0.3s;
         }
         .cyber-card:hover .card-desc, .cyber-card:active .card-desc {
-            color: #ff325a;
+            color: #ffffff;
         }
 
-        /* সোশ্যাল মিডিয়া হাব প্যানেল */
+        /* Social Connection Hub Minimal Panel */
         .social-hub {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            transform: translateZ(35px); 
+            gap: 12px;
+            margin-top: 20px;
+            transform: translateZ(40px);
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 320px;
+            max-width: 340px;
         }
 
         .social-link-btn {
-            background: rgba(255, 30, 70, 0.08);
-            color: #ff325a;
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            font-family: monospace;
+            font-family: SFMono-Regular, Consolas, monospace;
             font-size: 11px;
-            font-weight: bold;
-            padding: 8px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 30, 70, 0.3);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .social-link-btn:hover {
-            background: #ff325a;
-            color: #020205;
-            box-shadow: 0 0 20px #ff325a, 0 0 40px rgba(255, 30, 70, 0.6);
-            transform: translateY(-3px);
+            background: #ffffff;
+            color: #020204;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* মোবাইল অপটিমাইজেশন */
+        /* Fluid Mobile Breakpoints */
         @media (max-width: 650px) {
-            .matrix-container { gap: 20px; padding-top: 100px; }
-            .cyber-card { padding: 35px 20px; }
-            .card-title { font-size: 20px; }
+            .matrix-container { gap: 24px; padding-top: 120px; }
+            .cyber-card { padding: 40px 24px; }
+            .card-title { font-size: 21px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- হলিউড কোয়ালিটি হাইপারস্পেস ক্যানভাস -->
     <canvas id="warpCanvas"></canvas>
     <div class="ambient-mesh" id="meshGlow"></div>
 
-    <!-- HUD হেডার বার -->
-    <div class="cyber-hud" id="hud-date">NEXUS CORE // SYNCING</div>
+    <div class="cyber-hud" id="hud-date">CHRONO UNIT // SYNCING</div>
 
-    <!-- ৩ডি ডাইনামিক গ্রিড -->
     <div class="matrix-container" id="space-grid">
         
-        <!-- ০১. About Me -->
         <a href="about.html" class="cyber-card c-1">
             <span class="card-id">01</span>
             <div class="card-title">About Me</div>
             <div class="card-desc">Identity & Core</div>
         </a>
 
-        <!-- ০২. Connect -->
         <div class="cyber-card c-2">
             <span class="card-id">02</span>
             <div class="card-title">Connect</div>
@@ -245,21 +229,18 @@
             </div>
         </div>
 
-        <!-- ০৩. Education -->
         <a href="education.html" class="cyber-card c-3">
             <span class="card-id">03</span>
             <div class="card-title">Education</div>
             <div class="card-desc">Academic Timeline</div>
         </a>
 
-        <!-- ০৪. AI Projects -->
         <a href="ai_projects.html" class="cyber-card c-4">
             <span class="card-id">04</span>
             <div class="card-title">AI Projects</div>
             <div class="card-desc">Intelligence Labs</div>
         </a>
 
-        <!-- ০৫. Music Bands -->
         <a href="music.html" class="cyber-card c-5">
             <span class="card-id">05</span>
             <div class="card-title">Music Bands</div>
@@ -269,34 +250,40 @@
     </div>
 
     <script>
-        // ১. রিয়েল-টাইম ডেট জেনারেটর
+        // Real-time Epoch/Date HUD Synchronizer
         const dateObj = new Date();
-        document.getElementById('hud-date').innerText = `SYSTEM SYNC // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
+        document.getElementById('hud-date').innerText = `CHRONO CORE // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
 
-        // ২. মাউস ট্র্যাকিং অ্যাম্বিয়েন্ট লাইট এবং ৩ডি প্যারালাক্স এফেক্ট
+        // Smooth Physics Matrix Interactivity Engine
         const grid = document.getElementById('space-grid');
         const glow = document.getElementById('meshGlow');
-        let speedMultiplier = 1;
+        
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let targetSpeed = 1;
+        let currentSpeed = 1;
 
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
-            grid.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            // Relational positioning calculations for 3D grid tilt
+            targetX = (window.innerWidth / 2 - e.pageX) / 55;
+            targetY = (window.innerHeight / 2 - e.pageY) / 55;
 
+            // Fluid UI Lens Calculations
             const xPercent = (e.clientX / window.innerWidth) * 100;
             const yPercent = (e.clientY / window.innerHeight) * 100;
             glow.style.setProperty('--mouse-x', `${xPercent}%`);
             glow.style.setProperty('--mouse-y', `${yPercent}%`);
 
-            speedMultiplier = 4.5; // মাউস নাড়ালে ব্যাকগ্রাউন্ড ট্রাভেল স্পিড বেড়ে যাবে
+            targetSpeed = 7; // Warp speed increases under gravitational velocity (mouse motion)
         });
 
         document.addEventListener('mouseleave', () => {
-            grid.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            speedMultiplier = 1;
+            targetX = 0;
+            targetY = 0;
+            targetSpeed = 1;
         });
 
-        // ৩. 🔥 হাই-কোয়ালিটি সিনেমাটিক "স্টার-স্ট্রিক" হাইপারড্রাইভ ক্যানভাস ইঞ্জিন
+        // 3D Relativistic Hyperdrive Starfield Simulation (Strict Depth Projection Geometry)
         const canvas = document.getElementById("warpCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -307,21 +294,28 @@
         setCanvasSize();
 
         let stars = [];
-        const numStars = 180; // নিখুঁত ডেনসিটি
+        const numStars = 250; // Perfectly balanced celestial density
+        const fov = 400; // Realistic mathematical field of view
 
         for (let i = 0; i < numStars; i++) {
             stars.push({
-                x: Math.random() * canvas.width - canvas.width / 2,
-                y: Math.random() * canvas.height - canvas.height / 2,
+                x: Math.random() * canvas.width * 2 - canvas.width,
+                y: Math.random() * canvas.height * 2 - canvas.height,
                 z: Math.random() * canvas.width,
-                // থিমের সাথে ম্যাচ করে কিছু স্ট্রিক নিয়ন রেড আর কিছু পিউর হোয়াইট
-                color: Math.random() > 0.75 ? 'rgba(255, 30, 70, 0.85)' : 'rgba(255, 255, 255, 0.75)'
+                brightness: Math.random() * 0.4 + 0.6 // Eliminating raw blinding whites
             });
         }
 
         function animateWarp() {
-            // হালকা ট্রেইল ইফেক্টের জন্য স্মুথ ক্লিয়ারিং ব্যাকগ্রাউন্ড
-            ctx.fillStyle = 'rgba(2, 2, 5, 0.18)'; 
+            // Inertial interpolations for buttery smooth motion blur & lag-free stabilization
+            currentX += (targetX - currentX) * 0.08;
+            currentY += (targetY - currentY) * 0.08;
+            currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+
+            grid.style.transform = `rotateY(${-currentX}deg) rotateX(${currentY}deg)`;
+
+            // Deep Space Black with a very low alpha trail multiplier for cinematic organic stretch
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.12)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const cx = canvas.width / 2;
@@ -330,34 +324,34 @@
             for (let i = 0; i < stars.length; i++) {
                 let star = stars[i];
                 
-                // আগের পজিশন স্টোর করা হচ্ছে স্ট্রিক (লম্বা লাইন) বানানোর জন্য
                 let old_z = star.z;
-                
-                star.z -= 3.5 * speedMultiplier; 
+                star.z -= currentSpeed * 2.8; // Relativistic structural displacement
 
+                // Boundaries reset mapping to endless loop recursion
                 if (star.z <= 0) {
                     star.z = canvas.width;
-                    star.x = Math.random() * canvas.width - cx;
-                    star.y = Math.random() * canvas.height - cy;
+                    star.x = Math.random() * canvas.width * 2 - cx;
+                    star.y = Math.random() * canvas.height * 2 - cy;
                     old_z = star.z;
                 }
 
-                // কারেন্ট পজিশন প্রজেকশন
-                let px = (star.x / star.z) * canvas.width + cx;
-                let py = (star.y / star.z) * canvas.height + cy;
+                // Complex Math Spatial Projection mapping coordinates from 3D space vectors into 2D screenspace
+                let px = (star.x / star.z) * fov + cx;
+                let py = (star.y / star.z) * fov + cy;
                 
-                // আগের পজিশন প্রজেকশন (স্ট্রিক লাইন টানার জন্য)
-                let opx = (star.x / old_z) * canvas.width + cx;
-                let opy = (star.y / old_z) * canvas.height + cy;
+                let opx = (star.x / old_z) * fov + cx;
+                let opy = (star.y / old_z) * fov + cy;
 
-                let size = (1 - star.z / canvas.width) * 2.5;
+                // Fading luminosity vector according to relative scale (z-depth)
+                let alpha = (1 - star.z / canvas.width) * star.brightness;
+                let strokeSize = (1 - star.z / canvas.width) * 2;
 
                 if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
-                    ctx.strokeStyle = star.color;
-                    ctx.lineWidth = size;
+                    // Soft high-end organic cosmic white/ice blue mix instead of solid neon
+                    ctx.strokeStyle = `rgba(235, 245, 255, ${alpha})`;
+                    ctx.lineWidth = strokeSize;
                     ctx.lineCap = "round";
                     
-                    // সস্তা ডটের বদলে সিনেমাটিক লাইট রেখা/স্ট্রিক ড্রয়িং
                     ctx.beginPath();
                     ctx.moveTo(opx, opy);
                     ctx.lineTo(px, py);
