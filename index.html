@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar — Quantum Core Engine</title>
+    <title>Ratul Howladar — Quantum Scroll</title>
     <style>
+        /* বেসিক রিসেট ও গ্লোবাল স্টাইল */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            /* কালারফুল এআই আভা দেওয়ার জন্য ডিপ ভায়োলেট ও সায়ান-ব্লু মিক্সড গ্রেডিয়েন্ট */
-            background: radial-gradient(circle at top left, #1c0024, transparent 60%),
-                        radial-gradient(circle at bottom right, #001a33, transparent 60%),
-                        #000000; /* বেস পিচ ব্ল্যাক */
+            /* কালারফুল এআই আভা - ডার্ক থিম */
+            background: #050505 radial-gradient(circle at top left, #12001a, transparent 70%),
+                        radial-gradient(circle at bottom right, #001122, transparent 70%);
             background-attachment: fixed;
             color: #e0e0e0;
             font-family: 'Georgia', serif;
-            padding: 60px 20px 90px 20px;
-            margin: 0 auto;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            
-            /* পুরো বডিকে ৩ডি স্পেসে রূপান্তর */
-            perspective: 1600px;
-            perspective-origin: 50% 50%;
+            overflow: hidden; /* আমরা কাস্টম স্ক্রল কন্টেইনার ব্যবহার করব */
         }
 
-        /* হোয়াইট অ্যান্ড ব্ল্যাক গথিক এসভিজি ওয়াটারমার্ক (ব্যাকগ্রাউন্ডে আস্তে আস্তে ভাসবে) */
+        /* ব্যাকগ্রাউন্ডের গথিক ওয়াটারমার্ক */
         .gothic-watermark {
             position: fixed;
             top: 50%;
@@ -35,259 +31,265 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            opacity: 0.03; 
+            opacity: 0.04; 
             pointer-events: none;
-            user-select: none;
             animation: watermarkDrift 20s ease-in-out infinite alternate;
         }
 
         @keyframes watermarkDrift {
             0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            100% { transform: translate(-50%, -47%) rotate(4deg) scale(1.05); }
+            100% { transform: translate(-50%, -48%) rotate(3deg) scale(1.05); }
         }
 
-        /* 3D FLOATING AIR CONTAINER (হাওয়ায় ভাসমান ক্রিস্টাল গ্লাস মেইনফ্রেম) */
-        .quantum-card {
-            background: rgba(12, 12, 12, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        /* ভিডিওর মতো স্ক্রল কন্টেইনার (TikTok/Reels Vibe) */
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory; /* এই লাইনের কারণেই ভিডিওর মতো আটকে যাবে */
+            scroll-behavior: smooth;
+            perspective: 1500px; /* থ্রিডি স্পেস তৈরি */
+        }
+
+        /* স্ক্রলবার হাইড করার জন্য (ক্লিন লুক) */
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* প্রতিটি আলাদা সেকশন (ফুল স্ক্রিন নেবে) */
+        .snap-section {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* 3D গ্লাস কার্ড (হাওয়ায় ভাসমান) */
+        .glass-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 45px 30px;
-            max-width: 460px; /* লাইন লেন্থ লক */
+            padding: 40px 30px;
             width: 100%;
+            max-width: 420px; /* মোবাইলে পারফেক্ট, পিসিতেও সুন্দর লাগবে */
             
-            /* থ্রিডি ডেপথ এবং ড্রপ শ্যাডো ম্যাজিক */
+            /* থ্রিডি অ্যানিমেশনের মূল লজিক (হাইড অবস্থায় কেমন থাকবে) */
             transform-style: preserve-3d;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
-            
-            /* ৩ডি এন্ট্রান্স এবং কন্টিনিউয়াস ভাসমান লুপ অ্যানিমেশন */
-            animation: introFlyIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-                       hawaTeBhasa 6s ease-in-out infinite alternate 1.5s;
+            transform: translateY(100px) rotateX(-20deg) scale(0.85);
+            opacity: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* প্রথমবার পেজে ঢুকলে নিচ থেকে ৩ডি জুম হয়ে সামনে আসবে */
-        @keyframes introFlyIn {
-            0% {
-                transform: translateZ(-250px) translateY(60px) rotateX(12deg) rotateY(-5deg);
-                opacity: 0;
-            }
-            100% {
-                transform: translateZ(0) translateY(0) rotateX(5deg) rotateY(-5deg);
-                opacity: 1;
-            }
+        /* কার্ড যখন ফোকাসে আসবে (জাভাস্ক্রিপ্ট এই ক্লাস অ্যাড করবে) */
+        .glass-card.active-3d {
+            transform: translateY(0) rotateX(0deg) scale(1);
+            opacity: 1;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 243, 255, 0.05);
         }
 
-        /* কন্টিনিউয়াস হাওয়ায় ভাসার ৩ডি লুপ (True Floating Physics) */
-        @keyframes hawaTeBhasa {
-            0% {
-                transform: translateZ(0) translateY(0) rotateX(5deg) rotateY(-5deg);
-                box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
-            }
-            100% {
-                transform: translateZ(30px) translateY(-14px) rotateX(2deg) rotateY(-2deg);
-                box-shadow: 0 65px 140px rgba(0, 0, 0, 0.85); /* দূরত্ব বাড়লে ছায়া বড় হবে */
-            }
-        }
-
-        /* এলিট সিস্টেম ড্যাশবোর্ড বার */
+        /* ড্যাশবোর্ড ও টাইপোগ্রাফি */
         .sys-dashboard {
             display: flex;
             justify-content: space-between;
             font-family: monospace;
             font-size: 11px;
-            color: #555555;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 8px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transform: translateZ(15px); /* ৩ডি লেয়ার লিফট */
         }
-        .sys-status-active {
-            color: #00ff66;
-            font-weight: bold;
-        }
-
+        .sys-green { color: #00ff66; font-weight: bold; }
+        
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 5px;
             color: #ffffff;
-            transform: translateZ(25px);
+            margin-bottom: 5px;
         }
-
         .subtitle {
-            font-size: 14px;
-            color: #888888;
-            font-family: monospace;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            transform: translateZ(20px);
-        }
-
-        /* ডিরেক্টরি ট্রি কন্টেইনার */
-        .tree-container {
-            margin: 30px 0 20px 0;
-            line-height: 1.9;
-            transform: translateZ(20px);
-        }
-
-        /* টাইপিং অ্যানিমেশন প্রম্পট */
-        .tree-root-wrapper {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #00f3ff;
-            font-family: monospace;
-            color: #aaaaaa;
-            font-size: 16px;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            width: 0;
-            animation: typeCommand 1s steps(30, end) 1.4s forwards,
-                       blinkCursor 0.8s step-end infinite;
-        }
-
-        @keyframes typeCommand {
-            to { width: 100%; border-right-color: transparent; }
-        }
-        @keyframes blinkCursor {
-            from, to { border-right-color: transparent }
-            50% { border-right-color: #00f3ff; }
-        }
-
-        /* ডিরেক্টরি ট্রি ক্যাসকেড লোড */
-        .tree-line {
-            margin-bottom: 8px;
-            font-family: monospace;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateY(8px);
-            animation: cascadeSpawn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes cascadeSpawn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ট্রি লাইনের স্ট্যাগার্ড ডিলে */
-        .tl-1 { animation-delay: 2.2s; }
-        .tl-2 { animation-delay: 2.3s; }
-        .tl-3 { animation-delay: 2.4s; }
-        .tl-4 { animation-delay: 2.5s; }
-        .tl-5 { animation-delay: 2.6s; }
-        .tl-6 { animation-delay: 2.7s; }
-        .tl-7 { animation-delay: 2.8s; }
-        .tl-8 { animation-delay: 2.9s; }
-
-        .tree-char {
-            color: #444444;
-            font-family: monospace;
-            letter-spacing: 1px;
-        }
-
-        .tree-folder {
-            color: #888888;
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 17px;
-        }
-
-        .file-meta {
             font-size: 12px;
-            color: #555555;
+            color: #888;
             font-family: monospace;
-            margin-left: 6px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
+
+        /* কার্ডের ভেতরের ফোল্ডার/লিংক ডিজাইন */
+        .tree-line {
+            margin-bottom: 12px;
+            font-family: monospace;
+            white-space: nowrap;
+        }
+        .tree-char { color: #555; letter-spacing: 1px; }
+        .tree-folder { color: #aaa; font-weight: bold; font-size: 16px; margin-bottom: 5px; display: block;}
+        .file-meta { font-size: 11px; color: #555; margin-left: 6px; }
 
         a {
             color: #4da6ff;
-            text-decoration: underline;
+            text-decoration: none;
             font-family: 'Georgia', serif;
             font-size: 20px;
-            transition: color 0.2s;
+            border-bottom: 1px dashed #4da6ff;
+            transition: all 0.3s;
         }
-
         a:hover {
-            color: #80bfff;
+            color: #00f3ff;
+            border-bottom: 1px solid #00f3ff;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
         }
 
-        .separator {
-            text-align: center;
-            margin-top: 45px;
-            color: #333333;
-            letter-spacing: 5px;
-            transform: translateZ(10px);
+        /* প্রম্পট টেক্সট */
+        .prompt {
+            font-family: monospace;
+            color: #00f3ff;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        /* রেসপনসিভ জুম প্রোটেকশন */
-        @media (max-width: 600px) {
-            body { padding: 40px 15px 60px 15px; }
-            .quantum-card { padding: 35px 20px; }
-            .tree-line a { font-size: 19px; }
+        /* স্ক্রল ইন্ডিকেটর (নিচে যাওয়ার সিগন্যাল) */
+        .scroll-down-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: monospace;
+            font-size: 10px;
+            color: #555;
+            letter-spacing: 2px;
+            animation: bounceHint 2s infinite;
+        }
+        @keyframes bounceHint {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.3; }
+            50% { transform: translate(-50%, 8px); opacity: 1; }
+        }
+
+        /* রেসপনসিভ (মোবাইল অপটিমাইজেশন) */
+        @media (max-width: 480px) {
+            .glass-card { padding: 30px 20px; }
+            h1 { font-size: 24px; }
+            a { font-size: 18px; }
+            .tree-folder { font-size: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- গথিক হোয়াইট অ্যান্ড ব্ল্যাক ওয়াটারমার্ক (ব্যাকগ্রাউন্ড ড্রিফট লেয়ার) -->
+    <!-- ব্যাকগ্রাউন্ড গথিক লোগো -->
     <div class="gothic-watermark">
         <svg width="100%" height="100%" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
             <path d="M 400,50 L 400,750 M 100,320 L 700,320" stroke="#ffffff" stroke-width="2" />
             <polygon points="400,100 460,320 400,700 340,320" fill="none" stroke="#ffffff" stroke-width="1.5" />
             <circle cx="400" cy="320" r="120" fill="none" stroke="#ffffff" stroke-width="1.5" />
-            <circle cx="400" cy="320" r="200" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="6,6" />
-            <path d="M 400,320 L 230,150 M 400,320 L 570,150 M 400,320 L 230,490 M 400,320 L 570,490" stroke="#ffffff" stroke-width="1" />
         </svg>
     </div>
 
-    <!-- লিজেন্ডারি ৩ডি ভাসমান ক্রিস্টাল গ্লাস মেইনফ্রেম -->
-    <div class="quantum-card">
+    <!-- ভিডিও স্ক্রল মেইন কন্টেইনার -->
+    <div class="scroll-container">
 
-        <!-- লাইভ সিস্টেম ড্যাশবোর্ড বার -->
-        <div class="sys-dashboard">
-            <div>SYS: <span class="sys-status-active">ONLINE</span></div>
-            <div>LOC: DHAKA // BD</div>
-            <div id="live-system-date">LOADING...</div>
-        </div>
+        <!-- কার্ড ১: মেইন ইন্ট্রো -->
+        <section class="snap-section">
+            <div class="glass-card">
+                <div class="sys-dashboard">
+                    <div>SYS: <span class="sys-green">ONLINE</span></div>
+                    <div id="live-date">LOADING...</div>
+                </div>
+                <h1>Ratul Howladar</h1>
+                <div class="subtitle">personal directory / v2.0</div>
+                
+                <span class="prompt">> root/core_access/</span>
+                <div class="tree-line">
+                    <span class="tree-char">└── </span><a href="about.html">about.html</a><span class="file-meta">[3.8kb]</span>
+                </div>
+                
+                <div class="scroll-down-hint">SCROLL DOWN ▼</div>
+            </div>
+        </section>
 
-        <h1>Ratul Howladar</h1>
-        <div class="subtitle">personal directory / v1.0</div>
+        <!-- কার্ড ২: কানেকশন/সোশ্যাল -->
+        <section class="snap-section">
+            <div class="glass-card">
+                <span class="prompt">> root/connect_nodes/</span>
+                <span class="tree-folder">📂 social_media/</span>
+                <div class="tree-line">
+                    <span class="tree-char">├── </span><a href="social_media.html">links.html</a><span class="file-meta">[4.2kb]</span>
+                </div>
+                <div class="scroll-down-hint">SCROLL DOWN ▼</div>
+            </div>
+        </section>
 
-        <!-- মাল্টি-লেভেল টার্মিনাল ডিরেক্টরি ট্রি -->
-        <div class="tree-container">
-            <div class="tree-root-wrapper">ratul@neural_core:~$ tree --meta</div>
-            
-            <div class="tree-line tl-1"><span class="tree-char">├── </span><span class="tree-folder">core/</span></div>
-            <div class="tree-line tl-2"><span class="tree-char">│   └── </span><a href="about.html">about.html</a><span class="file-meta">[3.8kb]</span></div>
-            
-            <div class="tree-line tl-3"><span class="tree-char">├── </span><span class="tree-folder">connect/</span></div>
-            <div class="tree-line tl-4"><span class="tree-char">│   └── </span><a href="social_media.html">socials.html</a><span class="file-meta">[4.2kb]</span></div>
-            
-            <div class="tree-line tl-5"><span class="tree-char">├── </span><span class="tree-folder">archive/</span></div>
-            <div class="tree-line tl-6"><span class="tree-char">│   └── </span><a href="education.html">education.html</a><span class="file-meta">[5.1kb]</span></div>
-            
-            <div class="tree-line tl-7"><span class="tree-char">└── </span><span class="tree-folder">workspace/</span></div>
-            <div class="tree-line tl-8"><span class="tree-char">    ├── </span><a href="music.html">music.html</a><span class="file-meta">[6.7kb]</span></div>
-            <div class="tree-line tl-8"><span class="tree-char">    └── </span><a href="ai_projects.html">ai_projects.html</a><span class="file-meta">[3.5kb]</span></div>
-        </div>
+        <!-- কার্ড ৩: এডুকেশন আর্কাইভ -->
+        <section class="snap-section">
+            <div class="glass-card">
+                <span class="prompt">> root/archives/</span>
+                <span class="tree-folder">📂 education_logs/</span>
+                <div class="tree-line">
+                    <span class="tree-char">├── </span><a href="education.html">history.html</a><span class="file-meta">[5.1kb]</span>
+                </div>
+                <div class="scroll-down-hint">SCROLL DOWN ▼</div>
+            </div>
+        </section>
 
-        <div class="separator">***</div>
+        <!-- কার্ড ৪: ওয়ার্কস্পেস -->
+        <section class="snap-section">
+            <div class="glass-card">
+                <span class="prompt">> root/neural_workspace/</span>
+                <span class="tree-folder">📂 active_projects/</span>
+                <div class="tree-line">
+                    <span class="tree-char">├── </span><a href="music.html">music.html</a><span class="file-meta">[6.7kb]</span>
+                </div>
+                <div class="tree-line">
+                    <span class="tree-char">└── </span><a href="ai_projects.html">ai_projects.html</a><span class="file-meta">[3.5kb]</span>
+                </div>
+                <div class="scroll-down-hint">END OF DIRECTORY ◼</div>
+            </div>
+        </section>
 
     </div>
 
-    <!-- পিওর রিয়েল-টাইম অটো ডেট ইঞ্জিন -->
+    <!-- আনরিয়েল 3D স্ক্রল লজিক এবং লাইভ ডেট ইঞ্জিন -->
     <script>
-        (function() {
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const dd = String(today.getDate()).padStart(2, '0');
-            document.getElementById('live-system-date').innerText = `${yyyy}.${mm}.${dd}`;
-        })();
+        // ১. অটোমেটিক লাইভ ডেট জেনারেটর (প্রতিদিন চেঞ্জ হবে)
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('live-date').innerText = `${yyyy}.${mm}.${dd}`;
+
+        // ২. সিনেমাটিক 3D স্ক্রল ইন্টারসেকশন অবজার্ভার (অ্যাডভান্সড কোডিং)
+        // এটি ট্র্যাক করবে কোন কার্ডটা স্ক্রিনে আছে, আর সেই অনুযায়ী 3D অ্যানিমেশন ফায়ার করবে।
+        const cards = document.querySelectorAll('.glass-card');
+
+        const observerOptions = {
+            root: document.querySelector('.scroll-container'),
+            threshold: 0.6 // যখন কার্ডের ৬০% স্ক্রিনে আসবে তখন এনিমেশন ট্রিগার হবে
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // কার্ড সামনে আসলে 3D Active ক্লাস অ্যাড হবে
+                    entry.target.classList.add('active-3d');
+                } else {
+                    // কার্ড স্ক্রল করে সরিয়ে দিলে আবার 3D Rotation-এ ব্যাক করবে
+                    entry.target.classList.remove('active-3d');
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => {
+            cardObserver.observe(card);
+        });
     </script>
 
 </body>
