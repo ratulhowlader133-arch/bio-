@@ -77,7 +77,7 @@
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 1px solid rgba(0, 243, 255, 0.3); /* নরমাল অবস্হায় হালকা সায়ান বর্ডার */
+            border-top: 1px solid rgba(0, 243, 255, 0.3); 
             border-radius: 24px;
             padding: 45px 30px;
             display: flex;
@@ -96,7 +96,7 @@
             animation: antiGravity 7s ease-in-out infinite;
         }
 
-        /* কার্ডগুলোর মুভমেন্ট সিঙ্ক ব্রেক করা (একটা উঠলে অন্যটা নামবে) */
+        /* কার্ডগুলোর মুভমেন্ট সিঙ্ক ব্রেক করা */
         .c-1 { animation-delay: 0s; }
         .c-2 { animation-delay: -3.5s; }
         .c-3 { animation-delay: -1.8s; }
@@ -108,18 +108,17 @@
             50% { transform: translateY(-25px) rotateX(2deg); }
         }
 
-        /* 🔥 গড-লেভেল নিয়ন গ্লো ইফেক্ট (মাউস হোভার এবং মোবাইল টাচ/অ্যাক্টিভ দুইটার জন্যই) */
+        /* নিয়ন গ্লো ইফেক্ট (মাউস হোভার এবং মোবাইল টাচ দুইটার জন্যই) */
         .cyber-card:hover, .cyber-card:active {
             background: linear-gradient(135deg, rgba(0, 243, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
             border-color: rgba(0, 243, 255, 0.6);
             border-top: 1px solid #00f3ff;
-            /* মাল্টি-লেয়ার নিয়ন গ্লো শ্যাডো */
             box-shadow: 0 40px 80px rgba(0, 0, 243, 0.15), 
                         0 0 30px rgba(0, 243, 255, 0.3), 
                         0 0 60px rgba(0, 243, 255, 0.1),
                         inset 0 0 15px rgba(0, 243, 255, 0.1);
-            transform: scale(1.04) translateZ(60px) !important; /* জুম হয়ে স্ক্রিন থেকে বেরিয়ে আসবে */
-            animation-play-state: paused; /* হোভার করলে ভাসমান অ্যানিমেশন থামবে */
+            transform: scale(1.04) translateZ(60px) !important; 
+            animation-play-state: paused; 
         }
 
         /* ব্যাকগ্রাউন্ড ইনডেক্স নাম্বার */
@@ -147,11 +146,10 @@
             background: linear-gradient(180deg, #ffffff 0%, #bbbbbb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            transform: translateZ(30px); /* টেক্সট হাওয়ায় ভাসবে */
+            transform: translateZ(30px); 
             transition: all 0.4s;
         }
         
-        /* হোভার করলে ভেতরের টেক্সটও গ্লো করবে */
         .cyber-card:hover .card-title, .cyber-card:active .card-title {
             background: linear-gradient(180deg, #ffffff 0%, #00f3ff 100%);
             -webkit-background-clip: text;
@@ -172,12 +170,12 @@
             color: #00f3ff;
         }
 
-        /* ওয়ার্কিং সোশ্যাল মিডিয়া প্যানেল (Connect Card) */
+        /* সোশ্যাল মিডিয়া হাব প্যানেল */
         .social-hub {
             display: flex;
             gap: 10px;
             margin-top: 15px;
-            transform: translateZ(35px); /* বাটনগুলো সবচেয়ে ওপরে থাকবে */
+            transform: translateZ(35px); 
             flex-wrap: wrap;
             justify-content: center;
             max-width: 320px;
@@ -232,17 +230,17 @@
             <div class="card-desc">Identity & Core</div>
         </a>
 
-        <!-- ০২. Connect (৬টি ফুললি ওয়ার্কিং বাটন সহ সোশ্যাল মিডিয়া হাব) -->
+        <!-- ০২. Connect -->
         <div class="cyber-card c-2">
             <span class="card-id">02</span>
             <div class="card-title">Connect</div>
             <div class="social-hub">
-                <a href="https://facebook.com/ratulhowladar" target="_blank" class="social-link-btn">Facebook</a>
-                <a href="https://linkedin.com/in/ratulhowladar" target="_blank" class="social-link-btn">LinkedIn</a>
-                <a href="https://github.com/ratulhowladar" target="_blank" class="social-link-btn">GitHub</a>
-                <a href="https://instagram.com/ratulhowladar" target="_blank" class="social-link-btn">Instagram</a>
-                <a href="https://wa.me/YOUR_NUMBER" target="_blank" class="social-link-btn">WhatsApp</a>
-                <a href="mailto:your.email@example.com" class="social-link-btn">Email</a>
+                <a href="https://www.facebook.com/share/194iqWJxyf/" target="_blank" class="social-link-btn">Facebook</a>
+                <a href="https://www.linkedin.com/in/ratul-howladar-82b720418" target="_blank" class="social-link-btn">LinkedIn</a>
+                <a href="#" target="_blank" class="social-link-btn">GitHub</a>
+                <a href="https://www.instagram.com/judgeroronoa?igsh=MXRzZTZ3eTAzMDF1cg==" target="_blank" class="social-link-btn">Instagram</a>
+                <a href="https://wa.me/8801926548174" target="_blank" class="social-link-btn">WhatsApp</a>
+                <a href="mailto:ratulhowlader133@gmail.com" class="social-link-btn">Email</a>
             </div>
         </div>
 
@@ -280,27 +278,22 @@
         let speedMultiplier = 1;
 
         document.addEventListener('mousemove', (e) => {
-            // ৩ডি গ্রিড রোটেশন লজিক
             const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
             grid.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
 
-            // মাউস পজিশন লাইটিং ট্র্যাক
             const xPercent = (e.clientX / window.innerWidth) * 100;
             const yPercent = (e.clientY / window.innerHeight) * 100;
             glow.style.setProperty('--mouse-x', `${xPercent}%`);
             glow.style.setProperty('--mouse-y', `${yPercent}%`);
 
-            // মাউস নড়ালে ব্যাকগ্রাউন্ডের স্পেস টানেলের স্পিড বাড়বে
             speedMultiplier = 4;
         });
 
-        // মাউস স্থির বা স্ক্রিন থেকে চলে গেলে স্পিড নরমাল হবে এবং ৩ডি ব্যালেন্স হবে
         document.addEventListener('mouseleave', () => {
             grid.style.transform = `rotateY(0deg) rotateX(0deg)`;
             speedMultiplier = 1;
         });
-        document.addEventListener('mouseup', () => speedMultiplier = 1);
 
         // ৩. HTML5 Canvas 3D Hyperspace Warp Tunnel Engine
         const canvas = document.getElementById("warpCanvas");
@@ -315,7 +308,6 @@
         let stars = [];
         const numStars = 150;
 
-        // স্টার ক্রিয়েশন মেকানিজম
         for (let i = 0; i < numStars; i++) {
             stars.push({
                 x: Math.random() * canvas.width - canvas.width / 2,
@@ -325,9 +317,8 @@
             });
         }
 
-        // টানেল অ্যানিমেশন লুপ
         function animateWarp() {
-            ctx.fillStyle = 'rgba(2, 2, 5, 0.15)'; // ট্রেইল এফেক্ট এর জন্য হালকা ব্ল্যাক ওভারলে
+            ctx.fillStyle = 'rgba(2, 2, 5, 0.15)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const cx = canvas.width / 2;
@@ -335,23 +326,18 @@
 
             for (let i = 0; i < stars.length; i++) {
                 let star = stars[i];
-                
-                // তারকারা স্ক্রিনের দিকে ধেয়ে আসবে
                 star.z -= 2 * speedMultiplier; 
 
-                // স্ক্রিনের একদম কাছে চলে আসলে আবার পেছনে চলে যাবে (Infinite loop)
                 if (star.z <= 0) {
                     star.z = canvas.width;
                     star.x = Math.random() * canvas.width - cx;
                     star.y = Math.random() * canvas.height - cy;
                 }
 
-                // ৩ডি পার্সপেক্টিভ প্রোজেকশন ম্যাথমেটিক্স
                 let px = (star.x / star.z) * canvas.width + cx;
                 let py = (star.y / star.z) * canvas.height + cy;
                 let size = (1 - star.z / canvas.width) * 3;
 
-                // তারকা ড্রয়িং (যদি তারা স্ক্রিনের ভেতরে থাকে)
                 if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
                     ctx.fillStyle = star.color;
                     ctx.beginPath();
@@ -366,7 +352,6 @@
             setCanvasSize();
         });
 
-        // ইঞ্জিন স্টার্ট
         animateWarp();
     </script>
 </body>
