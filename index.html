@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ratul Howlader — 3D Cinematic Universe</title>
     <style>
-        /* গ্লোবাল রিসেট ও প্রিমিয়াম সিনেমাটিক সেটআপ */
+        /* গ্লোবাল রিসেট ও সিনেমাটিক সেটআপ */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #020205;
+            background-color: #030206;
             color: #ffffff;
             font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
@@ -20,20 +20,20 @@
             perspective: 2000px; /* এক্সট্রিম থ্রিডি ডেপথ */
         }
 
-        /* ৩ডি হাইপারস্পেস ক্যানভাস ব্যাকগ্রাউন্ড */
+        /* হাই-কোয়ালিটি ৩ডি হাইপারস্পেস ক্যানভাস */
         canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
-            background: radial-gradient(circle at center, #070b19 0%, #020205 100%);
+            background: #020205;
         }
 
-        /* অরগানিক ফ্লুইড লাইট গ্লো (নিয়ন গোল্ডেন থিম) */
+        /* নিয়ন রেড অ্যাম্বিয়েন্ট লাইট গ্লো */
         .ambient-mesh {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 183, 0, 0.12) 0%, transparent 50%);
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 30, 70, 0.12) 0%, transparent 60%);
             z-index: -1;
             pointer-events: none;
         }
@@ -45,16 +45,16 @@
             transform: translateX(-50%) translateZ(100px);
             font-family: monospace;
             font-size: 11px;
-            color: rgba(255, 183, 0, 0.8);
+            color: rgba(255, 30, 70, 0.9);
             letter-spacing: 5px;
             text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 30, 70, 0.05);
             padding: 8px 20px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 183, 0, 0.2);
+            border: 1px solid rgba(255, 30, 70, 0.3);
             backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(255, 183, 0, 0.15);
-            text-shadow: 0 0 8px rgba(255, 183, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 30, 70, 0.2);
+            text-shadow: 0 0 8px rgba(255, 30, 70, 0.8);
             z-index: 10;
         }
 
@@ -71,13 +71,14 @@
             transition: transform 0.1s ease-out;
         }
 
-        /* প্রিমিয়াম অ্যাপল-স্টাইল গ্লাস প্যানেল */
+        /* 🔥 প্রিমিয়াম নিয়ন ক্রিমসন রেড বডি কার্ড (যা ব্যাকগ্রাউন্ডে চমৎকার ফুটবে) */
         .cyber-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 1px solid rgba(255, 183, 0, 0.35); /* নরমাল অবস্থায় হালকা গোল্ডেন বর্ডার */
+            /* কার্ডের ভেতরের মেইন বডি কালার এখন একটি লাক্সারি ডার্ক রেড গ্রেডিয়েন্ট */
+            background: linear-gradient(135deg, rgba(230, 15, 55, 0.18) 0%, rgba(15, 3, 8, 0.85) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 30, 70, 0.25);
+            border-top: 1px solid rgba(255, 50, 90, 0.6); 
             border-radius: 24px;
             padding: 45px 30px;
             display: flex;
@@ -89,7 +90,8 @@
             color: #fff;
             position: relative;
             transform-style: preserve-3d;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
+                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             
             /* অ্যান্টি-গ্র্যাভিটি লেভিটেশন */
@@ -105,20 +107,18 @@
 
         @keyframes antiGravity {
             0%, 100% { transform: translateY(0px) rotateX(0deg); }
-            50% { transform: translateY(-25px) rotateX(2deg); }
+            50% { transform: translateY(-20px) rotateX(2deg); }
         }
 
-        /* 🔥 গড-লেভেল নিয়ন গোল্ড/ইয়েলো গলো ইফেক্ট (হোভার ও টাচ) */
+        /* হোভার করলে সলিড ভাইব্রেন্ট রেড গ্লো এবং থ্রিডি পুশ এফেক্ট */
         .cyber-card:hover, .cyber-card:active {
-            background: linear-gradient(135deg, rgba(255, 183, 0, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border-color: rgba(255, 183, 0, 0.6);
-            border-top: 1px solid #ffb700;
-            /* মাল্টি-লেয়ার নিয়ন গোল্ডেন শ্যাডো */
-            box-shadow: 0 40px 80px rgba(255, 100, 0, 0.12), 
-                        0 0 30px rgba(255, 183, 0, 0.35), 
-                        0 0 60px rgba(255, 183, 0, 0.15),
-                        inset 0 0 15px rgba(255, 183, 0, 0.15);
-            transform: scale(1.04) translateZ(60px) !important; 
+            background: linear-gradient(135deg, rgba(255, 20, 60, 0.3) 0%, rgba(25, 2, 6, 0.9) 100%);
+            border-color: rgba(255, 30, 70, 0.8);
+            border-top: 1px solid #ff1e46;
+            box-shadow: 0 40px 80px rgba(255, 20, 60, 0.25), 
+                        0 0 40px rgba(255, 20, 60, 0.4), 
+                        inset 0 0 20px rgba(255, 20, 60, 0.2);
+            transform: scale(1.05) translateZ(70px) !important; 
             animation-play-state: paused; 
         }
 
@@ -127,7 +127,7 @@
             font-family: monospace;
             font-size: 70px;
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.015);
             position: absolute;
             top: 10px; left: 20px;
             transform: translateZ(-20px);
@@ -135,7 +135,7 @@
             transition: color 0.4s;
         }
         .cyber-card:hover .card-id, .cyber-card:active .card-id {
-            color: rgba(255, 183, 0, 0.06);
+            color: rgba(255, 30, 70, 0.05);
         }
 
         /* টাইপোগ্রাফি এবং টেক্সট গ্লো */
@@ -144,24 +144,23 @@
             font-weight: 700;
             letter-spacing: 1px;
             margin-bottom: 12px;
-            background: linear-gradient(180deg, #ffffff 0%, #bbbbbb 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transform: translateZ(30px); 
             transition: all 0.4s;
         }
         
-        /* হোভার করলে টেক্সট গোল্ডেন গ্লো করবে */
         .cyber-card:hover .card-title, .cyber-card:active .card-title {
-            background: linear-gradient(180deg, #ffffff 0%, #ffb700 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #ff325a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 183, 0, 0.6);
+            text-shadow: 0 0 15px rgba(255, 30, 70, 0.6);
         }
 
         .card-desc {
             font-size: 13px;
-            color: #777;
+            color: #888;
             font-family: monospace;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -169,7 +168,7 @@
             transition: color 0.4s;
         }
         .cyber-card:hover .card-desc, .cyber-card:active .card-desc {
-            color: #ffb700;
+            color: #ff325a;
         }
 
         /* সোশ্যাল মিডিয়া হাব প্যানেল */
@@ -184,24 +183,24 @@
         }
 
         .social-link-btn {
-            background: rgba(255, 183, 0, 0.03);
-            color: #ffb700;
+            background: rgba(255, 30, 70, 0.08);
+            color: #ff325a;
             text-decoration: none;
             font-family: monospace;
             font-size: 11px;
             font-weight: bold;
             padding: 8px 14px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 183, 0, 0.25);
+            border: 1px solid rgba(255, 30, 70, 0.3);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .social-link-btn:hover {
-            background: #ffb700;
+            background: #ff325a;
             color: #020205;
-            box-shadow: 0 0 20px #ffb700, 0 0 40px rgba(255, 183, 0, 0.5);
+            box-shadow: 0 0 20px #ff325a, 0 0 40px rgba(255, 30, 70, 0.6);
             transform: translateY(-3px);
         }
 
@@ -215,7 +214,7 @@
 </head>
 <body>
 
-    <!-- ৩ডি হাইপারস্পেস টানেল ক্যানভাস -->
+    <!-- হলিউড কোয়ালিটি হাইপারস্পেস ক্যানভাস -->
     <canvas id="warpCanvas"></canvas>
     <div class="ambient-mesh" id="meshGlow"></div>
 
@@ -280,8 +279,8 @@
         let speedMultiplier = 1;
 
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
             grid.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
 
             const xPercent = (e.clientX / window.innerWidth) * 100;
@@ -289,7 +288,7 @@
             glow.style.setProperty('--mouse-x', `${xPercent}%`);
             glow.style.setProperty('--mouse-y', `${yPercent}%`);
 
-            speedMultiplier = 4;
+            speedMultiplier = 4.5; // মাউস নাড়ালে ব্যাকগ্রাউন্ড ট্রাভেল স্পিড বেড়ে যাবে
         });
 
         document.addEventListener('mouseleave', () => {
@@ -297,7 +296,7 @@
             speedMultiplier = 1;
         });
 
-        // ৩. HTML5 Canvas 3D Hyperspace Warp Tunnel Engine
+        // ৩. 🔥 হাই-কোয়ালিটি সিনেমাটিক "স্টার-স্ট্রিক" হাইপারড্রাইভ ক্যানভাস ইঞ্জিন
         const canvas = document.getElementById("warpCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -308,20 +307,21 @@
         setCanvasSize();
 
         let stars = [];
-        const numStars = 150;
+        const numStars = 180; // নিখুঁত ডেনসিটি
 
         for (let i = 0; i < numStars; i++) {
             stars.push({
                 x: Math.random() * canvas.width - canvas.width / 2,
                 y: Math.random() * canvas.height - canvas.height / 2,
                 z: Math.random() * canvas.width,
-                // ব্যাকগ্রাউন্ডের কিছু স্টারকেও হালকা গোল্ডেন টিন্ট দেওয়া হয়েছে থিমের সাথে ম্যাচ করতে
-                color: Math.random() > 0.8 ? 'rgba(255, 183, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'
+                // থিমের সাথে ম্যাচ করে কিছু স্ট্রিক নিয়ন রেড আর কিছু পিউর হোয়াইট
+                color: Math.random() > 0.75 ? 'rgba(255, 30, 70, 0.85)' : 'rgba(255, 255, 255, 0.75)'
             });
         }
 
         function animateWarp() {
-            ctx.fillStyle = 'rgba(2, 2, 5, 0.15)'; 
+            // হালকা ট্রেইল ইফেক্টের জন্য স্মুথ ক্লিয়ারিং ব্যাকগ্রাউন্ড
+            ctx.fillStyle = 'rgba(2, 2, 5, 0.18)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const cx = canvas.width / 2;
@@ -329,23 +329,39 @@
 
             for (let i = 0; i < stars.length; i++) {
                 let star = stars[i];
-                star.z -= 2 * speedMultiplier; 
+                
+                // আগের পজিশন স্টোর করা হচ্ছে স্ট্রিক (লম্বা লাইন) বানানোর জন্য
+                let old_z = star.z;
+                
+                star.z -= 3.5 * speedMultiplier; 
 
                 if (star.z <= 0) {
                     star.z = canvas.width;
                     star.x = Math.random() * canvas.width - cx;
                     star.y = Math.random() * canvas.height - cy;
+                    old_z = star.z;
                 }
 
+                // কারেন্ট পজিশন প্রজেকশন
                 let px = (star.x / star.z) * canvas.width + cx;
                 let py = (star.y / star.z) * canvas.height + cy;
-                let size = (1 - star.z / canvas.width) * 3;
+                
+                // আগের পজিশন প্রজেকশন (স্ট্রিক লাইন টানার জন্য)
+                let opx = (star.x / old_z) * canvas.width + cx;
+                let opy = (star.y / old_z) * canvas.height + cy;
+
+                let size = (1 - star.z / canvas.width) * 2.5;
 
                 if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
-                    ctx.fillStyle = star.color;
+                    ctx.strokeStyle = star.color;
+                    ctx.lineWidth = size;
+                    ctx.lineCap = "round";
+                    
+                    // সস্তা ডটের বদলে সিনেমাটিক লাইট রেখা/স্ট্রিক ড্রয়িং
                     ctx.beginPath();
-                    ctx.arc(px, py, size, 0, Math.PI * 2);
-                    ctx.fill();
+                    ctx.moveTo(opx, opy);
+                    ctx.lineTo(px, py);
+                    ctx.stroke();
                 }
             }
             requestAnimationFrame(animateWarp);
