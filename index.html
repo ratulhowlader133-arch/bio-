@@ -3,229 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar — Nexus Core</title>
+    <title>Ratul Howladar — Core</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            background-color: #030508;
-            color: #e0e0e0;
-            font-family: 'Georgia', serif;
+            background-color: #030305;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
             perspective: 1000px;
-            padding: 40px 20px;
+            overflow-x: hidden;
+            padding: 20px;
         }
 
-        /* 3D মুভিং সাইবার গ্রিড ফ্লোর (ফাঁকা ব্যাকগ্রাউন্ড ভরার জন্য) */
-        .cyber-grid {
+        .ambient-glow {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.08) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(600px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 4s linear infinite;
-            z-index: -2;
-        }
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 40px; }
-        }
-
-        /* ব্যাকগ্রাউন্ড গ্লো অরা */
-        .bg-glow {
-            position: fixed;
-            width: 60vw; height: 60vh;
-            background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
-            top: 20%; left: 20%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, transparent 70%);
             z-index: -1;
-            filter: blur(50px);
+            filter: blur(80px);
         }
 
-        /* মেইন 3D কন্টেইনার */
-        .nexus-wrapper {
+        .grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
             width: 100%;
-            max-width: 480px; /* কমপ্যাক্ট সাইজ */
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* প্যানেলগুলোর মাঝের স্পেস একদম কমিয়ে দেওয়া হয়েছে */
+            max-width: 900px;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out; /* মাউস ট্র্যাকিং এর জন্য */
-            animation: introFly 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes introFly {
-            0% { transform: translateZ(-200px) translateY(50px) rotateX(10deg); opacity: 0; }
-            100% { transform: translateZ(0) translateY(0) rotateX(0deg); opacity: 1; }
-        }
-
-        /* বেন্টো স্টাইল গ্লাস প্যানেল */
-        .glass-panel {
-            background: rgba(12, 16, 24, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 243, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px 25px; /* প্যাডিং কমিয়ে আনা হয়েছে */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(0, 243, 255, 0.03);
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(20px); /* কার্ডগুলো ভিতরের দিকে ভাসবে */
-        }
-
-        /* স্ক্যানিং লেজার লাইন (প্রতিটি কার্ডের ভেতর দিয়ে যাবে) */
-        .glass-panel::after {
-            content: "";
-            position: absolute;
-            top: -50%; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.8), transparent);
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-            animation: scanline 4s linear infinite;
-            opacity: 0.5;
-        }
-        @keyframes scanline {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        /* ড্যাশবোর্ড হেডার প্যানেল (একদম টাইট) */
-        .sys-header {
-            display: flex; justify-content: space-between;
-            font-family: monospace; font-size: 11px;
-            color: #777; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .sys-green { color: #00ff66; text-shadow: 0 0 8px rgba(0,255,102,0.4); }
-        .sys-cyan { color: #00f3ff; }
-
-        /* টাইপোগ্রাফি */
-        h1 { font-size: 24px; color: #fff; margin-bottom: 2px; letter-spacing: 1px; }
-        .subtitle { font-size: 12px; color: #666; font-family: monospace; text-transform: uppercase; letter-spacing: 2px; }
-        
-        .prompt { font-family: monospace; color: #00f3ff; font-size: 13px; margin-bottom: 12px; display: block; }
-        
-        /* ডিরেক্টরি ট্রি (কম্প্যাক্ট) */
-        .tree-line { margin-bottom: 8px; font-family: monospace; white-space: nowrap; }
-        .tree-char { color: #444; letter-spacing: 1px; }
-        .file-meta { font-size: 11px; color: #555; margin-left: 6px; }
-
-        a {
-            color: #4da6ff;
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: 0.5s;
+            cursor: pointer;
             text-decoration: none;
-            font-size: 18px;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s;
-        }
-        a:hover {
-            color: #00f3ff;
-            border-bottom: 1px solid #00f3ff;
-            text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
+            color: #fff;
+            animation: float 6s ease-in-out infinite;
         }
 
-        /* রেসপনসিভ */
-        @media (max-width: 500px) {
-            body { padding: 30px 15px; }
-            .nexus-wrapper { gap: 12px; }
-            .glass-panel { padding: 18px 20px; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+        }
+
+        /* কার্ডগুলোর মুভমেন্ট যেন আলাদা হয় */
+        .card:nth-child(even) { animation-delay: -3s; }
+        .card:nth-child(3n) { animation-delay: -1.5s; }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 243, 255, 0.5);
+            transform: scale(1.05) translateZ(30px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        h2 { margin-bottom: 10px; color: #00f3ff; letter-spacing: 2px; }
+        p { color: #aaa; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .header-bar {
+            position: fixed;
+            top: 30px;
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 3px;
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D ব্যাকগ্রাউন্ড ম্যাট্রিক্স -->
-    <div class="cyber-grid"></div>
-    <div class="bg-glow"></div>
+    <div class="ambient-glow"></div>
+    <div class="header-bar" id="live-date">LOADING...</div>
 
-    <!-- ইন্টারেক্টিভ মেইন কন্টেইনার -->
-    <div class="nexus-wrapper" id="nexus-core">
-        
-        <!-- প্যানেল ১: সিস্টেম স্ট্যাটাস (লাইভ ডেট ও পিং) -->
-        <div class="glass-panel" style="padding: 12px 25px;">
-            <div class="sys-header">
-                <div>SYS: <span class="sys-green">ONLINE</span></div>
-                <div>PING: <span class="sys-cyan" id="live-ping">12MS</span></div>
-                <div id="live-date">LOADING...</div>
-            </div>
-        </div>
-
-        <!-- প্যানেল ২: মেইন প্রোফাইল -->
-        <div class="glass-panel">
-            <h1>Ratul Howladar</h1>
-            <div class="subtitle" style="margin-bottom: 15px;">Core Directory / v3.0</div>
-            <span class="prompt">> root/identify --user</span>
-            <div class="tree-line">
-                <span class="tree-char">└── </span><a href="about.html">about.html</a><span class="file-meta">[3.8kb]</span>
-            </div>
-        </div>
-
-        <!-- প্যানেল ৩: কানেকশনস -->
-        <div class="glass-panel">
-            <span class="prompt">> root/network_nodes/</span>
-            <div class="tree-line">
-                <span class="tree-char">├── </span><a href="social_media.html">social_links.html</a><span class="file-meta">[4.2kb]</span>
-            </div>
-            <div class="tree-line">
-                <span class="tree-char">└── </span><a href="education.html">education_log.html</a><span class="file-meta">[5.1kb]</span>
-            </div>
-        </div>
-
-        <!-- প্যানেল ৪: প্রজেক্টস ও ওয়ার্কস্পেস -->
-        <div class="glass-panel">
-            <span class="prompt">> root/active_workspace/</span>
-            <div class="tree-line">
-                <span class="tree-char">├── </span><a href="music.html">music_production.html</a><span class="file-meta">[6.7kb]</span>
-            </div>
-            <div class="tree-line">
-                <span class="tree-char">└── </span><a href="ai_projects.html">ai_projects.html</a><span class="file-meta">[3.5kb]</span>
-            </div>
-        </div>
-
+    <div class="grid-3d">
+        <!-- ১. About Me -->
+        <a href="about.html" class="card">
+            <h2>01</h2>
+            <p>ABOUT ME</p>
+        </a>
+        <!-- ২. Connect -->
+        <a href="connect.html" class="card">
+            <h2>02</h2>
+            <p>CONNECT</p>
+        </a>
+        <!-- ৩. Education -->
+        <a href="education.html" class="card">
+            <h2>03</h2>
+            <p>EDUCATION</p>
+        </a>
+        <!-- ৪. AI Projects -->
+        <a href="ai_projects.html" class="card">
+            <h2>04</h2>
+            <p>AI PROJECTS</p>
+        </a>
+        <!-- ৫. Music Bands -->
+        <a href="music.html" class="card">
+            <h2>05</h2>
+            <p>MUSIC BANDS</p>
+        </a>
     </div>
 
-    <!-- জাভাস্ক্রিপ্ট ম্যাজিক ইঞ্জিন -->
     <script>
-        // ১. অটো লাইভ ডেট ও পিং ট্র্যাকার
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        document.getElementById('live-date').innerText = `${yyyy}.${mm}.${dd}`;
-
-        setInterval(() => {
-            const randomPing = Math.floor(Math.random() * 8) + 10; // 10ms to 18ms
-            document.getElementById('live-ping').innerText = `${randomPing}MS`;
-        }, 2000);
-
-        // ২. Unreal 3D Mouse / Touch Parallax Effect (বিশ্বমানের ফ্লেভার)
-        const wrapper = document.getElementById('nexus-core');
-
-        // পিসির জন্য মাউস মুভমেন্ট
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25; // টিল্ট সেনসিটিভিটি
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            wrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateZ(10px)`;
-        });
-
-        // মোবাইলের জন্য টাচ মুভমেন্ট
-        document.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            const xAxis = (window.innerWidth / 2 - touch.clientX) / 30;
-            const yAxis = (window.innerHeight / 2 - touch.clientY) / 30;
-            wrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateZ(10px)`;
-        });
-
-        // মাউস সরিয়ে নিলে বা টাচ ছেড়ে দিলে আবার আগের জায়গায় স্মুথলি ফেরত আসবে
-        document.addEventListener('mouseleave', () => {
-            wrapper.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(0)`;
-        });
-        document.addEventListener('touchend', () => {
-            wrapper.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(0)`;
-        });
+        const d = new Date();
+        document.getElementById('live-date').innerText = d.toISOString().split('T')[0].replace(/-/g, '.');
     </script>
-
 </body>
 </html>
