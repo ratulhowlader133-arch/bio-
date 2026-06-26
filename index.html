@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howladar — Core Directory</title>
+    <title>Ratul Howladar — Quantum Core</title>
     <style>
         body {
             /* কালারফুল এআই আভা দেওয়ার জন্য ডিপ ভায়োলেট ও সায়ান-ব্লু মিক্সড গ্রেডিয়েন্ট */
@@ -20,6 +20,7 @@
             font-size: 20px; /* জুম ফিক্সড - একদম স্পষ্ট আর বড় দেখাবে */
             position: relative;
             z-index: 1;
+            overflow-x: hidden;
         }
 
         /* হোয়াইট অ্যান্ড ব্ল্যাক গথিক এসভিজি ওয়াটারমার্ক */
@@ -36,7 +37,21 @@
             user-select: none;
         }
 
-        /* টপ লেভেল কোডার সিস্টেম ড্যাশবোর্ড বার */
+        /* 3D Cinematic Entry Wrapper - পুরো ইন্টারফেস গভীর থেকে সামনে আসবে */
+        .view-frame {
+            transform: perspective(1200px) translateZ(-150px) translateY(20px);
+            opacity: 0;
+            animation: cinematicEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cinematicEntrance {
+            to {
+                transform: perspective(1200px) translateZ(0) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* টপ লেভেল সিস্টেম ড্যাশবোর্ড বার */
         .sys-dashboard {
             display: flex;
             justify-content: space-between;
@@ -50,7 +65,7 @@
             letter-spacing: 1px;
         }
         .sys-status-active {
-            color: #00ff66; /* প্রো গ্রিন অ্যাকসেন্ট */
+            color: #00ff66; /* প্রফেশনাল গ্রিন */
         }
 
         h1 {
@@ -70,36 +85,62 @@
             margin-bottom: 40px;
         }
 
-        /* অ্যাডভান্সড ডিরেক্টরি ট্রি স্ট্রাকচার */
+        /* ডিরেক্টরি ট্রি কন্টেইনার */
         .tree-container {
             margin: 30px 0 50px 0;
             line-height: 1.9;
         }
 
-        .tree-root {
+        /* টাইপিং অ্যানিমেশন প্রম্পট */
+        .tree-root-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #00f3ff; /* টাইপিং কার্সার */
             font-family: monospace;
             color: #aaaaaa;
             font-size: 16px;
             letter-spacing: 1px;
             margin-bottom: 15px;
-            display: block;
+            width: 0;
+            animation: typeCommand 1s steps(30, end) 1s forwards,
+                       blinkCursor 0.8s step-end infinite;
         }
 
-        /* ব্লিংকিং টার্মিনাল কার্সার অ্যানিমেশন */
-        @keyframes blink {
-            50% { opacity: 0; }
+        @keyframes typeCommand {
+            to { width: 100%; border-right-color: transparent; }
         }
-        .cursor {
-            animation: blink 1s infinite;
-            color: #00f3ff;
-            font-weight: bold;
+        @keyframes blinkCursor {
+            from, to { border-right-color: transparent }
+            50% { border-right-color: #00f3ff; }
         }
 
+        /* ডিরেক্টরি ট্রি লাইন এবং ক্যাসকেড অ্যানিমেশন (একটি পর একটি নামবে) */
         .tree-line {
             margin-bottom: 8px;
             font-family: monospace;
             white-space: nowrap;
+            opacity: 0;
+            transform: translateY(8px);
+            animation: cascadeSpawn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        @keyframes cascadeSpawn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ট্রি লাইনের স্ট্যাগার্ড ডিলে (বিল্ড সিকোয়েন্স) */
+        .tl-1 { animation-delay: 1.8s; }
+        .tl-2 { animation-delay: 1.9s; }
+        .tl-3 { animation-delay: 2.0s; }
+        .tl-4 { animation-delay: 2.1s; }
+        .tl-5 { animation-delay: 2.2s; }
+        .tl-6 { animation-delay: 2.3s; }
+        .tl-7 { animation-delay: 2.4s; }
+        .tl-8 { animation-delay: 2.5s; }
 
         .tree-char {
             color: #444444;
@@ -114,7 +155,6 @@
             font-size: 17px;
         }
 
-        /* মেটাডেটা ট্যাগ (ফাইলের সাইজ) */
         .file-meta {
             font-size: 12px;
             color: #555555;
@@ -123,7 +163,7 @@
         }
 
         a {
-            color: #4da6ff; /* অ্যাসথেটিক ইলেকট্রিক ব্লু */
+            color: #4da6ff; /* ইলেকট্রিক ব্লু */
             text-decoration: underline;
             font-family: 'Georgia', serif;
             font-size: 20px;
@@ -133,7 +173,6 @@
             color: #80bfff;
         }
 
-        /* ক্লিন মিনিমাল সেপারেটর */
         .separator {
             text-align: center;
             margin-top: 50px;
@@ -155,7 +194,7 @@
 </head>
 <body>
 
-    <!-- হোয়াইট অ্যান্ড *ব্ল্যাক গথিক এসভিজি ওয়াটারমার্ক ব্যাকগ্রাউন্ড -->
+    <!-- গথিক হোয়াইট অ্যান্ড ব্ল্যাক ওয়াটারমার্ক ব্যাকগ্রাউন্ড -->
     <div class="gothic-watermark">
         <svg width="100%" height="100%" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
             <path d="M 400,50 L 400,750 M 100,320 L 700,320" stroke="#ffffff" stroke-width="2" />
@@ -166,36 +205,43 @@
         </svg>
     </div>
 
-    <!-- সিস্টেম ড্যাশবোর্ড মেটাডেটা বার -->
-    <div class="sys-dashboard">
-        <div>SYS: <span class="sys-status-active">ONLINE</span></div>
-        <div>LOC: DHAKA // BD</div>
-        <div>2026.06.26</div>
-    </div>
+    <!-- 3D অ্যানিমেশন ফ্রেম শুরু -->
+    <div class="view-frame">
 
-    <h1>Ratul Howladar</h1>
-    <div class="subtitle">personal directory / v1.0</div>
+        <!-- সিস্টেম ড্যাশবোর্ড বার -->
+        <div class="sys-dashboard">
+            <div>SYS: <span class="sys-status-active">ONLINE</span></div>
+            <div>LOC: DHAKA // BD</div>
+            <div>2026.06.26</div>
+        </div>
 
-    <!-- মাল্টি-লেভেল প্রো-কোডার ডিরেক্টরি ট্রি -->
-    <div class="tree-container">
-        <span class="tree-root">ratul@neural_core:~$ tree --meta<span class="cursor">_</span></span>
-        
-        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">core/</span></div>
-        <div class="tree-line"><span class="tree-char">│   └── </span><a href="about.html">about.html</a><span class="file-meta">[3.8kb]</span></div>
-        
-        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">connect/</span></div>
-        <div class="tree-line"><span class="tree-char">│   └── </span><a href="social_media.html">socials.html</a><span class="file-meta">[4.2kb]</span></div>
-        
-        <div class="tree-line"><span class="tree-char">├── </span><span class="tree-folder">archive/</span></div>
-        <div class="tree-line"><span class="tree-char">│   └── </span><a href="education.html">education.html</a><span class="file-meta">[5.1kb]</span></div>
-        
-        <div class="tree-line"><span class="tree-char">└── </span><span class="tree-folder">workspace/</span></div>
-        <div class="tree-line"><span class="tree-char">    ├── </span><a href="music.html">music.html</a><span class="file-meta">[6.7kb]</span></div>
-        <div class="tree-line"><span class="tree-char">    └── </span><a href="ai_projects.html">ai_projects.html</a><span class="file-meta">[3.5kb]</span></div>
-    </div>
+        <h1>Ratul Howladar</h1>
+        <div class="subtitle">personal directory / v1.0</div>
 
-    <!-- ক্লিন এন্ডিং -->
-    <div class="separator">***</div>
+        <!-- মাল্টি-লেভেল টার্মিনাল ডিরেক্টরি ট্রি -->
+        <div class="tree-container">
+            <!-- অটোমেটিক টাইপিং প্রম্পট লাইন -->
+            <div class="tree-root-wrapper">ratul@neural_core:~$ tree --meta</div>
+            
+            <!-- ফোল্ডার এবং ফাইলে ঠাসা অপশন সিকোয়েন্স (স্ট্যাগার্ড ক্যাসকেড লোড) -->
+            <div class="tree-line tl-1"><span class="tree-char">├── </span><span class="tree-folder">core/</span></div>
+            <div class="tree-line tl-2"><span class="tree-char">│   └── </span><a href="about.html">about.html</a><span class="file-meta">[3.8kb]</span></div>
+            
+            <div class="tree-line tl-3"><span class="tree-char">├── </span><span class="tree-folder">connect/</span></div>
+            <div class="tree-line tl-4"><span class="tree-char">│   └── </span><a href="social_media.html">socials.html</a><span class="file-meta">[4.2kb]</span></div>
+            
+            <div class="tree-line tl-5"><span class="tree-char">├── </span><span class="tree-folder">archive/</span></div>
+            <div class="tree-line tl-6"><span class="tree-char">│   └── </span><a href="education.html">education.html</a><span class="file-meta">[5.1kb]</span></div>
+            
+            <div class="tree-line tl-7"><span class="tree-char">└── </span><span class="tree-folder">workspace/</span></div>
+            <div class="tree-line tl-8"><span class="tree-char">    ├── </span><a href="music.html">music.html</a><span class="file-meta">[6.7kb]</span></div>
+            <div class="tree-line tl-8"><span class="tree-char">    └── </span><a href="ai_projects.html">ai_projects.html</a><span class="file-meta">[3.5kb]</span></div>
+        </div>
+
+        <!-- ক্লিন ফিনিশিং -->
+        <div class="separator">***</div>
+
+    </div> <!-- 3D অ্যানিমেশন ফ্রেম শেষ -->
 
 </body>
 </html>
