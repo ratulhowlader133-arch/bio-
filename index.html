@@ -3,70 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howlader — Cosmic Odyssey</title>
+    <title>Ratul Howlader — 3D Space Continuum</title>
+    
+    <!-- 👑 Top-Coder Tool: Blender-Level WebGL Render Engine (Three.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        /* Global Reset & Pro Cinematic Environment */
+        /* Global Minimalist Spatial Framework */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #020204;
+            background-color: #010103; /* Deep Cosmic Void Base */
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            perspective: 1600px; /* Golden-ratio 3D depth focal point */
+            perspective: 1200px; /* Precise focal length mimicking a 50mm Blender Lens */
         }
 
-        /* 👑 High-End Video Production Background Container */
-        .video-bg-wrapper {
+        /* 🎥 WebGL 3D Blender Viewport Canvas */
+        #webglCanvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
-            overflow: hidden;
-            background: #010103;
-        }
-
-        .video-bg-wrapper video {
-            width: 100%; height: 100%;
-            object-fit: cover; /* Ensures real screen scale without distortion */
             pointer-events: none;
         }
 
-        /* 🎨 Hollywood Color-Grading & Peripheral Vignette Mask */
-        .video-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(2, 2, 5, 0.2) 30%, #020205 100%),
-                        linear-gradient(180deg, rgba(2,2,5,0.4) 0%, rgba(2,2,5,0.1) 50%, rgba(2,2,5,0.6) 100%);
+        /* Ambient Space Nebula Light Layer */
+        .nebula-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(25, 15, 45, 0.4) 0%, transparent 70%),
+                        radial-gradient(circle at 80% 20%, rgba(10, 25, 50, 0.3) 0%, transparent 60%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Minimalist Premium HUD */
+        /* High-End Tech HUD */
         .cyber-hud {
             position: absolute;
             top: 40px; left: 50%;
-            transform: translateX(-50%) translateZ(80px);
+            transform: translateX(-50%) translateZ(60px);
             font-family: SFMono-Regular, Consolas, monospace;
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             letter-spacing: 6px;
             text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             padding: 10px 24px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             z-index: 10;
         }
 
-        /* 3D Framework Grid */
+        /* 3D Dynamic Matrix Grid */
         .matrix-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -79,14 +76,12 @@
             will-change: transform;
         }
 
-        /* ✨ Premium Frosted Obsidian Glass Cards (Isolates beautifully from the real space video) */
+        /* 💎 Architectural Monolithic Obsidian Cards (High Contrast Solid Core) */
         .cyber-card {
-            background: rgba(13, 14, 18, 0.75); /* High-contrast matte dark skin */
-            backdrop-filter: blur(40px); /* Massive Apple-style glass refraction behind the card */
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-top: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 24px;
+            background: #0b0c10; /* Pure Matte Dark Solid to fully pop out from 3D space background */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* Luxury Apple-style top rim light */
+            border-radius: 20px;
             padding: 55px 35px;
             display: flex;
             flex-direction: column;
@@ -97,15 +92,16 @@
             color: #fff;
             position: relative;
             transform-style: preserve-3d;
-            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.04);
-            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Premium Cinematic Shadows */
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95),
+                        inset 0 1px 0px rgba(255, 255, 255, 0.03);
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Professional Micro-Floating Motion */
+            /* Professional Floating Animation */
             animation: spatialDrift 8s ease-in-out infinite;
         }
 
-        /* Asynchronous Phase Breaks */
+        /* Asynchronous Phase Offsets to break robotic uniformity */
         .c-1 { animation-delay: 0s; }
         .c-2 { animation-delay: -3.2s; }
         .c-3 { animation-delay: -1.6s; }
@@ -114,17 +110,17 @@
 
         @keyframes spatialDrift {
             0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-10px) rotateY(0.8deg); }
+            50% { transform: translateY(-8px) rotateY(0.5deg); }
         }
 
-        /* Clean Micro-interactions on Hover */
+        /* Ultra-Clean Micro-interactions on Hover */
         .cyber-card:hover, .cyber-card:active {
-            background: rgba(18, 20, 26, 0.85);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: #10121a;
+            border-color: rgba(255, 255, 255, 0.25);
             border-top-color: #ffffff;
-            box-shadow: 0 60px 110px rgba(0, 0, 0, 0.95),
-                        0 0 50px rgba(255, 255, 255, 0.03);
-            transform: scale(1.03) translateZ(80px) !important;
+            box-shadow: 0 60px 120px rgba(0, 0, 0, 1),
+                        0 0 30px rgba(255, 255, 255, 0.02);
+            transform: scale(1.03) translateZ(60px) !important;
             animation-play-state: paused;
         }
 
@@ -133,18 +129,14 @@
             font-family: SFMono-Regular, Consolas, monospace;
             font-size: 55px;
             font-weight: 800;
-            color: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.015);
             position: absolute;
             top: 15px; left: 25px;
             transform: translateZ(-15px);
             pointer-events: none;
-            transition: color 0.4s;
-        }
-        .cyber-card:hover .card-id, .cyber-card:active .card-id {
-            color: rgba(255, 255, 255, 0.04);
         }
 
-        /* Elegant High-Contrast Typography */
+        /* Typography Layout */
         .card-title {
             font-size: 25px;
             font-weight: 600;
@@ -156,12 +148,11 @@
 
         .card-desc {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             font-family: SFMono-Regular, Consolas, monospace;
             text-transform: uppercase;
             letter-spacing: 2px;
             transform: translateZ(15px);
-            transition: color 0.3s;
         }
         .cyber-card:hover .card-desc, .cyber-card:active .card-desc {
             color: #ffffff;
@@ -179,15 +170,15 @@
         }
 
         .social-link-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-family: SFMono-Regular, Consolas, monospace;
             font-size: 11px;
             font-weight: 500;
             padding: 10px 18px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -195,7 +186,7 @@
 
         .social-link-btn:hover {
             background: #ffffff;
-            color: #020204;
+            color: #010103;
             box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
         }
@@ -210,17 +201,12 @@
 </head>
 <body>
 
-    <!-- 🎥 Production-Grade Cinematic Background Video Loop -->
-    <div class="video-bg-wrapper">
-        <!-- নিচে একটি স্ট্যাবল প্রিমিয়াম মোশন স্পেস ভিডিওর লিংক দেওয়া আছে। তুমি চাইলে তোমার নিজস্ব ডাউনলোড করা ৪K 'space.mp4' ফাইল দিয়ে এই URL টি রিপ্লেস করে নিতে পারো -->
-        <video autoplay loop muted playsinline id="spaceVideo">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-background-1611-large.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
+    <!-- 🎥 Pure 3D WebGL Canvas Render Target -->
+    <canvas id="webglCanvas"></canvas>
+    <div class="nebula-overlay" id="nebulaGlow"></div>
 
-    <!-- HUD Core Element -->
-    <div class="cyber-hud" id="hud-date">CHRONO UNIT // SYNCING</div>
+    <!-- HUD Control Element -->
+    <div class="cyber-hud" id="hud-date">CHRONO CORE // SECURE</div>
 
     <!-- 3D Matrix Framework Grid -->
     <div class="matrix-container" id="space-grid">
@@ -270,44 +256,132 @@
     </div>
 
     <script>
-        // Real-time Epoch/Date HUD Synchronizer
+        // System Time Sync
         const dateObj = new Date();
-        document.getElementById('hud-date').innerText = `CHRONO CORE // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
+        document.getElementById('hud-date').innerText = `CHRONO UNIT // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
 
-        // 🧠 Top-Coder Lerp Physics Interactivity Script (Interpolates raw snaps for buttery 3D motion)
+        // UI Physics Interactivity Setup
         const grid = document.getElementById('space-grid');
-        const video = document.getElementById('spaceVideo');
+        const nebula = document.getElementById('nebulaGlow');
         
+        let mouseX = 0, mouseY = 0;
         let targetX = 0, targetY = 0;
         let currentX = 0, currentY = 0;
+        let warpSpeedTarget = 1.5;
+        let warpSpeedCurrent = 1.5;
 
         document.addEventListener('mousemove', (e) => {
-            // Relational matrix calculations
+            // Screen mapping vectors for 3D UI matrix tilt
             targetX = (window.innerWidth / 2 - e.pageX) / 55;
             targetY = (window.innerHeight / 2 - e.pageY) / 55;
-            
-            // Video Playback speed ramps up slightly based on user interaction velocity (Creative Director touch)
-            if(video) video.playbackRate = 1.6;
+
+            // Follow-mouse ambient lens illumination coordinates
+            const xPercent = (e.clientX / window.innerWidth) * 100;
+            const yPercent = (e.clientY / window.innerHeight) * 100;
+            nebula.style.setProperty('--mouse-x', `${xPercent}%`);
+            nebula.style.setProperty('--mouse-y', `${yPercent}%`);
+
+            // Kinetic warp acceleration triggers when mouse moves
+            warpSpeedTarget = 8.0; 
         });
 
         document.addEventListener('mouseleave', () => {
-            targetX = 0;
-            targetY = 0;
-            if(video) video.playbackRate = 1.0;
+            targetX = 0; targetY = 0;
+            warpSpeedTarget = 1.5;
         });
 
-        // Loop animation applying the mathematical linear interpolation (lerp)
-        function smoothRender() {
-            // Formula: current = current + (target - current) * easing_factor
-            currentX += (targetX - currentX) * 0.08;
-            currentY += (targetY - currentY) * 0.08;
+        // 🧠 BLENDER CORE: REAL-TIME 3D WEBGL GRAPHICS ENGINE (THREE.JS)
+        let scene, camera, renderer, starGeometry, stars, starCount = 3500;
+        let positions, velocities;
 
-            grid.style.transform = `rotateY(${-currentX}deg) rotateX(${currentY}deg)`;
-            
-            requestAnimationFrame(smoothRender);
+        function init3DSpace() {
+            // 1. Scene & Cinematic Camera Setup (Mimicking Blender's Viewport Rig)
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 1500);
+            camera.position.z = 600;
+
+            // 2. GPU Accelerated Renderer Configurations
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webglCanvas'), alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 3. Volumetric Particle System Geometry (Blender-like Point Cloud)
+            starGeometry = new THREE.BufferGeometry();
+            positions = new Float32Array(starCount * 3);
+            velocities = new Float32Array(starCount);
+
+            for (let i = 0; i < starCount * 3; i += 3) {
+                // Spread particles randomly inside a massive 3D box bounding matrix
+                positions[i] = (Math.random() - 0.5) * 1500;     // X-axis depth
+                positions[i + 1] = (Math.random() - 0.5) * 1500; // Y-axis height
+                positions[i + 2] = (Math.random() - 0.5) * 2000; // Z-axis deep depth
+                
+                velocities[i / 3] = 2.0 + Math.random() * 4.0;   // Custom velocity vector per star
+            }
+
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            // 4. LookDev Shading & Material Pipeline (Simulating Eevee Shaders with Depth Attenuation)
+            const starMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 2.2,
+                sizeAttenuation: true, // Particles closer to camera become larger automatically
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending // Blender style glowing light additive pass
+            });
+
+            stars = new THREE.Points(starGeometry, starMaterial);
+            scene.add(stars);
         }
-        
-        smoothRender();
+
+        // ⚙️ Core Physics Engine Loop (Linear Interpolation Lerp & Spatial Matrices)
+        function renderLoop() {
+            // UI Smooth Matrix Physics Lerp Calculations
+            currentX += (targetX - currentX) * 0.07;
+            currentY += (targetY - currentY) * 0.07;
+            grid.style.transform = `rotateY(${-currentX}deg) rotateX(${currentY}deg)`;
+
+            // WebGL Camera Gimbal Rig tracking user orientation smoothly
+            camera.position.x += (targetX * 15 - camera.position.x) * 0.05;
+            camera.position.y += (-targetY * 15 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Time Warp Velocity Interpolations
+            warpSpeedCurrent += (warpSpeedTarget - warpSpeedCurrent) * 0.04;
+
+            // Compute Relativistic Forward Particle Velocities (GPU memory update)
+            const coords = starGeometry.attributes.position.array;
+            for (let i = 0; i < starCount; i++) {
+                let zIndex = i * 3 + 2;
+                coords[zIndex] += velocities[i] * warpSpeedCurrent; // Moving forward down the Z space vector
+
+                // Loop reset boundaries if particle passes the focal viewing lens plane
+                if (coords[zIndex] > 600) {
+                    coords[zIndex] = -1400; // Send back to deep space infinity
+                    coords[i * 3] = (Math.random() - 0.5) * 1500;
+                    coords[i * 3 + 1] = (Math.random() - 0.5) * 1500;
+                }
+            }
+            starGeometry.attributes.position.needsUpdate = true; // Flushes new coordinate coordinates to the GPU
+
+            // Micro system axial rotators to simulate absolute cosmological drifting physics
+            stars.rotation.z += 0.0006;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(renderLoop);
+        }
+
+        // Responsive Engine Viewport Matrix Re-calculations
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize Structural Pipelines
+        init3DSpace();
+        renderLoop();
     </script>
 </body>
 </html>
