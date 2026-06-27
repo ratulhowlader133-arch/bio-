@@ -3,454 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howlader — Advanced NASA-Grade 3D Continuum</title>
-    
+    <title>Ratul Howlader — 4D Alien Nexus</title>
+
+    <!-- 👽 Unreal-Level WebGL Render Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+
     <style>
-        /* Pro Cinematic Environment Reset */
+        /* 🌌 Zero-Gravity Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        ::-webkit-scrollbar { display: none; } /* Hide scrollbars for alien look */
 
         body {
-            background-color: #030307; /* Absolute Dark Void */
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: #000000;
+            color: #00f0ff; /* Alien Neon Cyan */
+            font-family: "Courier New", Courier, monospace;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            /* 50mm Cinematography Lens Simulation */
-            perspective: 1400px; 
+            flex-direction: column;
+            justify-content: flex-end; /* Pushes UI to the bottom */
         }
 
-        /* 🎥 High-End 3D Graphics Render Target (GPU Driven) */
-        #nasaViewport {
+        /* 🎥 4D Unreal Engine Viewport */
+        #alienViewport {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Peripheral Deep Space Vignette Layer */
-        .cosmic-vignette {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, rgba(3, 3, 7, 0) 30%, #030307 100%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Minimalist HUD Interface */
-        .cyber-hud {
+        /* 🛸 HUD Targeting Scanner */
+        .hud-scanner {
             position: absolute;
-            top: 30px; left: 50%;
-            transform: translateX(-50%) translateZ(100px);
-            font-family: SFMono-Regular, Consolas, monospace;
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.45);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px 24px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.95);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 300px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.05);
+        }
+        .hud-scanner::before {
+            content: ''; position: absolute;
+            top: 50%; left: -20px; width: 340px; height: 1px;
+            background: rgba(0, 240, 255, 0.2);
+        }
+        .hud-scanner::after {
+            content: ''; position: absolute;
+            left: 50%; top: -20px; height: 340px; width: 1px;
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        /* 💻 The Mobile-Fixed Alien Console (Horizontal Layout) */
+        .alien-console {
+            width: 100%;
+            padding: 20px 40px 40px 40px;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto; /* Horizontal Scroll */
+            scroll-snap-type: x mandatory;
             z-index: 10;
+            /* Gradient fade so it blends with deep space */
+            background: linear-gradient(to top, rgba(0,0,5,0.9) 0%, rgba(0,0,0,0) 100%);
         }
 
-        /* Highly Optimized Responsive Grid Layout */
-        .matrix-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            width: 90%;
-            max-width: 1200px;
-            transform-style: preserve-3d;
-            z-index: 1;
-            padding: 140px 0 80px 0;
-            will-change: transform;
-        }
-
-        /* ✨ Apple Vision Pro Style Ultra-Translucent Obsidian Glass Panels */
-        /* Completely isolates from dark background via premium refraction but lets 3D space render through */
+        /* 💎 Anti-Gravity Data Panels */
         .cyber-card {
-            background: rgba(10, 11, 16, 0.45); /* Hyper-translucent solid dark core */
-            backdrop-filter: blur(25px); /* Real-time refraction physics */
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 1px solid rgba(255, 255, 255, 0.25); /* Premium top ridge rim-lighting */
-            border-radius: 24px;
-            padding: 55px 35px;
+            flex: 0 0 320px; /* Fixed width for horizontal scrolling */
+            scroll-snap-align: center;
+            background: rgba(5, 10, 15, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-top: 2px solid #00f0ff;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             text-decoration: none;
-            color: #fff;
+            color: #00f0ff;
+            transition: all 0.4s ease;
             position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.03);
-            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            
-            /* High-End Architectural Micro Drifting Motion */
-            animation: spatialDrift 8s ease-in-out infinite;
+            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%); /* Sci-Fi Angled Corners */
         }
 
-        /* Async Phase Modulation to stop synchronized robotic swaying */
-        .c-1 { animation-delay: 0s; }
-        .c-2 { animation-delay: -3.2s; }
-        .c-3 { animation-delay: -1.6s; }
-        .c-4 { animation-delay: -4.8s; }
-        .c-5 { animation-delay: -2.4s; }
-
-        @keyframes spatialDrift {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-10px) rotateY(0.6deg); }
+        .cyber-card:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: #ff003c; /* Alien Magenta Hover */
+            border-top-color: #ff003c;
+            box-shadow: 0 10px 40px rgba(255, 0, 60, 0.3), inset 0 0 20px rgba(255, 0, 60, 0.1);
+            color: #ff003c;
+            transform: translateY(-10px);
         }
 
-        /* Premium Tactical Hover Responses */
-        .cyber-card:hover, .cyber-card:active {
-            background: rgba(15, 17, 26, 0.65);
-            border-color: rgba(255, 255, 255, 0.35);
-            border-top-color: #ffffff;
-            box-shadow: 0 60px 130px rgba(0, 0, 0, 0.95),
-                        0 0 40px rgba(255, 255, 255, 0.04);
-            transform: scale(1.04) translateZ(80px) !important;
-            animation-play-state: paused;
-        }
-
-        /* Graphic Element Structural ID */
         .card-id {
-            font-family: SFMono-Regular, Consolas, monospace;
-            font-size: 55px;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.015);
             position: absolute;
-            top: 15px; left: 25px;
-            transform: translateZ(-20px);
-            pointer-events: none;
+            top: 10px; left: 15px;
+            font-size: 14px;
+            color: rgba(0, 240, 255, 0.5);
+            letter-spacing: 2px;
         }
 
-        /* High-Contrast Typography Framework */
         .card-title {
-            font-size: 25px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin-bottom: 14px;
-            color: #ffffff;
-            transform: translateZ(30px);
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .card-desc {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-            font-family: SFMono-Regular, Consolas, monospace;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: translateZ(15px);
-        }
-
-        /* Social Connection Panels */
-        .social-hub {
-            display: flex;
-            gap: 12px;
-            margin-top: 22px;
-            transform: translateZ(45px);
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 340px;
-        }
-
-        .social-link-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-family: SFMono-Regular, Consolas, monospace;
             font-size: 11px;
-            font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
             letter-spacing: 1px;
         }
 
-        .social-link-btn:hover {
-            background: #ffffff;
-            color: #030307;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        /* 🔗 Social Hub */
+        .social-hub {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
         }
 
-        /* 📱 Ultimate Mobile Optimization Mesh Layout */
-        /* Ensures maximum space visibility on phones by reducing card spacing and scaling elements */
-        @media (max-width: 650px) {
-            .matrix-container { 
-                grid-template-columns: 1fr;
-                gap: 24px; 
-                padding: 110px 16px 60px 16px;
-                width: 95%;
+        .social-btn {
+            background: transparent;
+            color: #00f0ff;
+            border: 1px solid #00f0ff;
+            padding: 6px 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .social-btn:hover {
+            background: #ff003c;
+            color: #000;
+            border-color: #ff003c;
+            box-shadow: 0 0 15px #ff003c;
+        }
+
+        /* 📱 Mobile Target Overrides */
+        @media (max-width: 768px) {
+            .alien-console {
+                padding: 10px 20px 20px 20px;
+                gap: 15px;
             }
-            .cyber-card { 
-                padding: 40px 24px; 
-                background: rgba(10, 11, 16, 0.35); /* Increased transparency for small screen peeking */
+            .cyber-card {
+                flex: 0 0 260px; /* Smaller cards for mobile */
+                padding: 25px 15px;
             }
-            .card-title { font-size: 21px; }
-            .cyber-hud { top: 20px; font-size: 8px; padding: 8px 16px; }
+            .hud-scanner {
+                width: 200px; height: 200px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="nasaViewport"></canvas>
-    <div class="cosmic-vignette"></div>
+    <!-- 🎥 4D Render Engine Canvas -->
+    <canvas id="alienViewport"></canvas>
+    
+    <!-- Targeting HUD -->
+    <div class="hud-scanner"></div>
 
-    <div class="cyber-hud" id="hud-date">SYSTEM CONTINUUM // LINKED</div>
-
-    <div class="matrix-container" id="space-grid">
+    <!-- 💻 Horizontal Dock / Console (THE MOBILE FIX) -->
+    <!-- This sits at the bottom, leaving the entire top screen for the 3D space! -->
+    <div class="alien-console" id="ui-dock">
         
-        <a href="about.html" class="cyber-card c-1">
-            <span class="card-id">01</span>
+        <!-- 01. About -->
+        <a href="about.html" class="cyber-card">
+            <span class="card-id">SYS.01</span>
             <div class="card-title">About Me</div>
-            <div class="card-desc">Identity & Core</div>
+            <div class="card-desc">Entity Bio-Data</div>
         </a>
 
-        <div class="cyber-card c-2">
-            <span class="card-id">02</span>
-            <div class="card-title">Connect</div>
+        <!-- 02. Connect -->
+        <div class="cyber-card">
+            <span class="card-id">SYS.02</span>
+            <div class="card-title">Comm-Link</div>
             <div class="social-hub">
-                <a href="https://www.facebook.com/share/194iqWJxyf/" target="_blank" class="social-link-btn">Facebook</a>
-                <a href="https://www.linkedin.com/in/ratul-howladar-82b720418" target="_blank" class="social-link-btn">LinkedIn</a>
-                <a href="#" target="_blank" class="social-link-btn">GitHub</a>
-                <a href="https://www.instagram.com/judgeroronoa?igsh=MXRzZTZ3eTAzMDF1cg==" target="_blank" class="social-link-btn">Instagram</a>
-                <a href="https://wa.me/8801926548174" target="_blank" class="social-link-btn">WhatsApp</a>
-                <a href="mailto:ratulhowlader133@gmail.com" class="social-link-btn">Email</a>
+                <a href="https://www.facebook.com/share/194iqWJxyf/" target="_blank" class="social-btn">FB</a>
+                <a href="https://www.linkedin.com/in/ratul-howladar-82b720418" target="_blank" class="social-btn">IN</a>
+                <a href="#" target="_blank" class="social-btn">GIT</a>
+                <a href="https://www.instagram.com/judgeroronoa?igsh=MXRzZTZ3eTAzMDF1cg==" target="_blank" class="social-btn">IG</a>
+                <a href="https://wa.me/8801926548174" target="_blank" class="social-btn">WA</a>
             </div>
         </div>
 
-        <a href="education.html" class="cyber-card c-3">
-            <span class="card-id">03</span>
+        <!-- 03. Education -->
+        <a href="education.html" class="cyber-card">
+            <span class="card-id">SYS.03</span>
             <div class="card-title">Education</div>
-            <div class="card-desc">Academic Timeline</div>
+            <div class="card-desc">Neural Training</div>
         </a>
 
-        <a href="ai_projects.html" class="cyber-card c-4">
-            <span class="card-id">04</span>
+        <!-- 04. AI Projects -->
+        <a href="ai_projects.html" class="cyber-card">
+            <span class="card-id">SYS.04</span>
             <div class="card-title">AI Projects</div>
-            <div class="card-desc">Intelligence Labs</div>
+            <div class="card-desc">Machine Logic</div>
         </a>
 
-        <a href="music.html" class="cyber-card c-5">
-            <span class="card-id">05</span>
-            <div class="card-title">Music Bands</div>
-            <div class="card-desc">Sound & Favourites</div>
+        <!-- 05. Music Bands -->
+        <a href="music.html" class="cyber-card">
+            <span class="card-id">SYS.05</span>
+            <div class="card-title">Acoustics</div>
+            <div class="card-desc">Sonic Frequencies</div>
         </a>
 
     </div>
 
     <script>
-        // System Time HUD Clock Synchronizer
-        const dateObj = new Date();
-        document.getElementById('hud-date').innerText = `NASA MATRIX INTERFACE // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
-
-        // Interface Rig Interaction Selectors
-        const grid = document.getElementById('space-grid');
+        // 🧠 4D EINSTEIN LEVEL PROCEDURAL RENDERING ENGINE
+        let scene, camera, renderer, tesseract, ufoArmada = [], warpStars;
         
+        // Touch/Mouse Matrix
         let targetX = 0, targetY = 0;
-        let currentX = 0, currentY = 0;
-        let isInteracting = false;
 
-        // Kinetic Vector Calculations (Supports Both Desktop Hover & Mobile Touch Drag)
-        function handleInteraction(pointerX, pointerY) {
-            targetX = (window.innerWidth / 2 - pointerX) / 45;
-            targetY = (window.innerHeight / 2 - pointerY) / 45;
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            handleInteraction(e.pageX, e.pageY);
-        });
-
-        // 📱 Touch Engine Framework for Mobile Core
-        document.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                handleInteraction(e.touches[0].pageX, e.touches[0].pageY);
-                isInteracting = true;
-            }
-        }, { passive: true });
-
-        document.addEventListener('touchend', () => { isInteracting = false; });
-        document.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
-
-        // 🚀 ADVANCED NASA-SPECIFIC 3D GRAPHICS PIPELINE (THREE.JS CODES)
-        let scene, camera, renderer, accretionDisk, asteroidField;
-        const totalParticles = 2800; // Perfect balanced computational weight
-        const totalAsteroids = 35; // Pure 3D objects with mesh properties
-
-        function initNasaEngine() {
-            // 1. Structural Scene & Spatial Focal Mechanics
+        function init4DEngine() {
+            // 1. Core Dimensions
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
-            camera.position.z = 700;
+            scene.fog = new THREE.FogExp2(0x000000, 0.0015); // Alien atmospheric fog
 
-            // 2. High-Performance WebGL Shader Allocator
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('nasaViewport'), alpha: true, antialias: true });
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.z = 400;
+
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('alienViewport'), antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(window.devicePixelRatio);
 
-            // 3. 💡 Blender Style Lighting Rig Installation
-            // Specular light mapping to dynamically shade real 3D assets floating around
-            const ambientLight = new THREE.AmbientLight(0x0a0a1a, 1.5);
-            scene.add(ambientLight);
+            // 2. Extraterrestrial Lighting
+            const ambient = new THREE.AmbientLight(0x001133, 2);
+            scene.add(ambient);
+            const coreLight = new THREE.PointLight(0x00f0ff, 3, 800);
+            coreLight.position.set(0, 0, 0);
+            scene.add(coreLight);
 
-            const pointLight = new THREE.PointLight(0x8a4fff, 3, 1200); // Cinematic Volumetric Purple
-            pointLight.position.set(200, 100, 300);
-            scene.add(pointLight);
+            // 3. 🌀 The 4D Tesseract (Hypercube Illusion)
+            // Creating a complex alien geometric core
+            const tessGroup = new THREE.Group();
+            
+            // Outer Geometry
+            const geoOuter = new THREE.IcosahedronGeometry(60, 1);
+            const matOuter = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.3 });
+            const meshOuter = new THREE.Mesh(geoOuter, matOuter);
+            
+            // Inner Geometry (4th Dimensional shift)
+            const geoInner = new THREE.OctahedronGeometry(35, 0);
+            const matInner = new THREE.MeshStandardMaterial({ color: 0xff003c, metalness: 1, roughness: 0.2, emissive: 0xff003c, emissiveIntensity: 0.5 });
+            const meshInner = new THREE.Mesh(geoInner, matInner);
 
-            const directionalLight = new THREE.DirectionalLight(0x4f9eff, 1.5); // Deep Blue Spatial Glow
-            directionalLight.position.set(-300, 200, -100);
-            scene.add(directionalLight);
+            tessGroup.add(meshOuter);
+            tessGroup.add(meshInner);
+            scene.add(tessGroup);
+            tesseract = tessGroup;
 
-            // 4. 🌀 Procedural 3D Accretion Spiral Disk (True Universe Coordinates)
-            const particleGeometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(totalParticles * 3);
-            const colors = new Float32Array(totalParticles * 3);
-
-            const colorCenter = new THREE.Color(0xffffff); // Core hyper-bright mass
-            const colorEdge = new THREE.Color(0x3d115c);   // Outer space dust accretion color
-
-            for (let i = 0; i < totalParticles; i++) {
-                // Mathematical Spiral Layout Generation Formulas
-                const i3 = i * 3;
-                const radius = Math.random() * 800 + 50;
-                const spinAngle = radius * 0.012;
-                const branchAngle = ((i % 4) * 2 * Math.PI) / 4; // 4 Dimensional spiral quadrants
-
-                const randomX = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 45;
-                const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 45;
-                const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 45;
-
-                positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
-                positions[i3 + 1] = randomY; // Kept narrow for realistic disc flatness
-                positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
-
-                // Color interpolation based on relative depth density (Closer to center = brighter core)
-                const mixedColor = colorCenter.clone();
-                mixedColor.lerp(colorEdge, radius / 850);
-
-                colors[i3] = mixedColor.r;
-                colors[i3 + 1] = mixedColor.g;
-                colors[i3 + 2] = mixedColor.b;
-            }
-
-            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const particleMaterial = new THREE.PointsMaterial({
-                size: 2.5,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.75,
-                blending: THREE.AdditiveBlending, // Simulates absolute energy emissive properties
-                sizeAttenuation: true
-            });
-
-            accretionDisk = new THREE.Points(particleGeometry, particleMaterial);
-            accretionDisk.rotation.x = Math.PI * 0.22; // Cinematic tilt angle matching NASA standard
-            scene.add(accretionDisk);
-
-            // 5. 🪨 Blender Mesh Infrastructure: Floating 3D Asteroid Fields
-            asteroidField = new THREE.Group();
-            // Blender style mesh primitives with real structural indices
-            const asteroidGeometry = new THREE.IcosahedronGeometry(12, 1); 
-            const asteroidMaterial = new THREE.MeshStandardMaterial({
-                color: 0x1f2230,
-                roughness: 0.85,
-                metalness: 0.3,
-                flatShading: true // Gives a rocky, faceted Blender mesh finish
-            });
-
-            for (let i = 0; i < totalAsteroids; i++) {
-                const mesh = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-                
-                // Distribute structural debris randomly in volumetric space box
-                mesh.position.set(
-                    (Math.random() - 0.5) * 1400,
-                    (Math.random() - 0.5) * 800,
-                    (Math.random() - 0.5) * 1000
+            // 4. 🛸 Procedural Alien Airships (UFO Generator)
+            // Einstein Top Coder Trick: Creating ships from math without external files!
+            for(let i = 0; i < 15; i++) {
+                const ufo = createAlienShip();
+                // Random spawn positions in deep space
+                ufo.position.set(
+                    (Math.random() - 0.5) * 1200,
+                    (Math.random() - 0.5) * 600,
+                    (Math.random() - 0.5) * -2000 - 500 // Spawn far behind
                 );
-
-                // Randomized sizes to scale vector profiles
-                const scale = Math.random() * 1.5 + 0.3;
-                mesh.scale.set(scale, scale, scale);
-                
-                // Track discrete spin values directly inside object memory profile
-                mesh.userData = {
-                    spinX: Math.random() * 0.015,
-                    spinY: Math.random() * 0.015
-                };
-
-                asteroidField.add(mesh);
+                // Assign random warp speed
+                ufo.userData = { speed: Math.random() * 8 + 4, sway: Math.random() * 0.05 };
+                ufoArmada.push(ufo);
+                scene.add(ufo);
             }
-            scene.add(asteroidField);
+
+            // 5. 🚀 Hyper-Warp Starfield (Unreal Engine Speed Trails)
+            const starGeo = new THREE.BufferGeometry();
+            const starCount = 4000;
+            const starPos = new Float32Array(starCount * 3);
+            for(let i=0; i < starCount * 3; i++) {
+                starPos[i] = (Math.random() - 0.5) * 2000;
+            }
+            starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+            
+            // By scaling points on the Z axis, we create speed lines!
+            const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true, opacity: 0.8 });
+            warpStars = new THREE.Points(starGeo, starMat);
+            scene.add(warpStars);
         }
 
-        // 🧠 Real-Time Physics Calculus Engine (Mathematical Frame Easing Loop)
+        // 🛸 Mathematical UFO Construction Function
+        function createAlienShip() {
+            const group = new THREE.Group();
+            
+            // Hull (Flattened Sphere)
+            const hullGeo = new THREE.SphereGeometry(15, 32, 16);
+            hullGeo.scale(1, 0.25, 1); // Squish it into a flying saucer
+            const hullMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9, roughness: 0.1 });
+            const hull = new THREE.Mesh(hullGeo, hullMat);
+
+            // Energy Ring (Glowing Cyan)
+            const ringGeo = new THREE.TorusGeometry(18, 0.8, 16, 100);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = Math.PI / 2;
+
+            // Engine Core (Glowing Magenta)
+            const coreGeo = new THREE.CylinderGeometry(5, 5, 10, 32);
+            const coreMat = new THREE.MeshBasicMaterial({ color: 0xff003c });
+            const core = new THREE.Mesh(coreGeo, coreMat);
+
+            group.add(hull);
+            group.add(ring);
+            group.add(core);
+            
+            // Tilt for dynamic flight pose
+            group.rotation.x = Math.PI * 0.1; 
+            return group;
+        }
+
+        // 🕹️ Parallax Interaction Sensors
+        function handleMove(clientX, clientY) {
+            targetX = (clientX / window.innerWidth) * 2 - 1;
+            targetY = -(clientY / window.innerHeight) * 2 + 1;
+        }
+        document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+        document.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }, {passive: true});
+
+        // ⚙️ 4D Space-Time Computational Loop
         let clock = new THREE.Clock();
 
-        function computationalLoop() {
-            const elapsedTime = clock.getElapsedTime();
+        function animate() {
+            const time = clock.getElapsedTime();
 
-            // 1. UI Matrix Interpolation Interpolator (Buttery Soft Lerp)
-            currentX += (targetX - currentX) * 0.07;
-            currentY += (targetY - currentY) * 0.07;
-            grid.style.transform = `rotateY(${-currentX}deg) rotateX(${currentY}deg)`;
+            // 1. Camera Parallax (Look around the universe)
+            camera.position.x += (targetX * 150 - camera.position.x) * 0.05;
+            camera.position.y += (targetY * 150 - camera.position.y) * 0.05;
+            camera.lookAt(0, 0, -200);
 
-            // 2. Camera Viewport Physics Trajectory Logic
-            // Baseline continuous cosmological movement if user stops active interaction
-            if (!isInteracting && targetX === 0) {
-                const autoOrbitX = Math.sin(elapsedTime * 0.15) * 8;
-                const autoOrbitY = Math.cos(elapsedTime * 0.1) * 5;
-                camera.position.x += (autoOrbitX - camera.position.x) * 0.03;
-                camera.position.y += (autoOrbitY - camera.position.y) * 0.03;
-            } else {
-                camera.position.x += (targetX * 20 - camera.position.x) * 0.05;
-                camera.position.y += (-targetY * 20 - camera.position.y) * 0.05;
-            }
-            camera.lookAt(scene.position);
+            // 2. 4D Tesseract Rotation (Complex multi-axis)
+            tesseract.rotation.x = time * 0.2;
+            tesseract.rotation.y = time * 0.3;
+            tesseract.children[1].rotation.z = time * -0.5; // Inner core spins backward
+            tesseract.children[1].scale.setScalar(1 + Math.sin(time * 2) * 0.1); // Breathing effect
 
-            // 3. 🌀 Accretion Disk Rotation Velocity
-            accretionDisk.rotation.y = elapsedTime * 0.04;
+            // 3. Alien Armada Hyper-Flight Mechanics
+            ufoArmada.forEach((ufo, index) => {
+                // Fly towards the camera on Z axis
+                ufo.position.z += ufo.userData.speed;
+                // Evasive sine-wave swaying maneuvers
+                ufo.position.x += Math.sin(time * 2 + index) * 2;
+                ufo.position.y += Math.cos(time * 1.5 + index) * 1.5;
+                // Spin the energy ring
+                ufo.children[1].rotation.z += 0.05;
 
-            // 4. 🪨 Asteroid Field Micro Axial Kinematics
-            asteroidField.children.forEach(asteroid => {
-                asteroid.rotation.x += asteroid.userData.spinX;
-                asteroid.rotation.y += asteroid.userData.spinY;
-                
-                // Minor orbital float deviation paths
-                asteroid.position.y += Math.sin(elapsedTime + asteroid.position.x) * 0.08;
+                // If ship flies past camera, respawn deep in space
+                if (ufo.position.z > 500) {
+                    ufo.position.z = -2000;
+                    ufo.position.x = (Math.random() - 0.5) * 1200;
+                    ufo.position.y = (Math.random() - 0.5) * 600;
+                }
             });
 
+            // 4. Warp-Drive Starfield Acceleration
+            const positions = warpStars.geometry.attributes.position.array;
+            for(let i = 0; i < positions.length; i += 3) {
+                positions[i+2] += 15; // Unbelievable speed
+                if(positions[i+2] > 500) {
+                    positions[i+2] = -2000;
+                }
+            }
+            warpStars.geometry.attributes.position.needsUpdate = true;
+
             renderer.render(scene, camera);
-            requestAnimationFrame(computationalLoop);
+            requestAnimationFrame(animate);
         }
 
-        // Elastic Viewport Re-Projection Grid Matrix
+        // Elastic Dimensional Resizer
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Initialize Core System Pipelines
-        initNasaEngine();
-        computationalLoop();
+        // Ignite Unreal Engines
+        init4DEngine();
+        animate();
     </script>
 </body>
 </html>
