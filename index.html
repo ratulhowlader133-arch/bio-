@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howlader | Neural Core</title>
+    <title>Ratul Howladar | Neural Core</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         :root { --bg: #050505; --glass: rgba(255, 255, 255, 0.03); }
@@ -13,13 +13,13 @@
         #webgl-canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
         
         .ui-container { position: relative; z-index: 10; padding: 80px 10%; }
-        .hero { max-width: 600px; margin-bottom: 80px; }
-        .hero h1 { font-size: 5rem; letter-spacing: -3px; line-height: 1; }
+        .hero { max-width: 800px; margin-bottom: 80px; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 6rem); letter-spacing: -3px; line-height: 1; }
+        .hero .subtitle { color: #00d4ff; font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.8; }
         .hero p { color: rgba(255,255,255,0.5); margin-top: 20px; font-size: 1.2rem; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
-        /* Card Styles */
         .card { 
             background: var(--glass); backdrop-filter: blur(20px); 
             padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
@@ -27,7 +27,6 @@
         }
         .card:hover { border: 1px solid rgba(255,255,255,0.2); transform: translateY(-5px); }
         
-        /* Non-link Card Style */
         .card.static { cursor: default; }
         .card.static:hover { transform: none; border: 1px solid rgba(255,255,255,0.05); }
 
@@ -41,8 +40,9 @@
 
     <div class="ui-container">
         <section class="hero">
-            <h1>NEURAL<br>CORE</h1>
-            <p>Ratul Howlader. Advanced computational geometry and digital interface design. Bridging the gap between human intuition and machine intelligence.</p>
+            <div class="subtitle">Neural Core</div>
+            <h1>RATUL<br>HOWLADAR</h1>
+            <p>Advanced computational geometry and digital interface design. Bridging the gap between human intuition and machine intelligence.</p>
         </section>
 
         <section class="grid">
@@ -52,7 +52,7 @@
             <a href="ai_projects.html" class="card"><h3>04. AI Projects</h3><p>Deploying machine learning models, automation agents, and innovative AI solutions.</p></a>
             <a href="music.html" class="card"><h3>05. Acoustics</h3><p>Exploring the frequency of sound and audio engineering concepts.</p></a>
             
-            <!-- System Status Card (Static) -->
+            <!-- System Status Card -->
             <div class="card static">
                 <h3>06. System Status</h3>
                 <p>Engine: Three.js / WebGL<br>Status: Active<br>Latency: Near-Zero<br>Date: <span id="live-date"></span></p>
@@ -61,16 +61,15 @@
     </div>
 
     <script>
-        // Set Date
+        // Live Date
         document.getElementById('live-date').innerText = new Date().toLocaleDateString();
 
-        // 3D Engine
+        // 3D Animation Engine
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
 
-        // Starfield
         const starsGeo = new THREE.BufferGeometry();
         const starsPos = new Float32Array(5000 * 3);
         for(let i=0; i<5000*3; i++) starsPos[i] = (Math.random() - 0.5) * 100;
@@ -78,7 +77,6 @@
         const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.05, color: 0xffffff }));
         scene.add(stars);
 
-        // Glowing Core
         const coreGeo = new THREE.SphereGeometry(2, 64, 64);
         const coreMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.3 });
         const core = new THREE.Mesh(coreGeo, coreMat);
