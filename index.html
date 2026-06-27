@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        #webgl-canvas { position: fixed; top: 0; left: 0; z-index: 0; }
+        #webgl-canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
         
         .ui-container { position: relative; z-index: 10; padding: 80px 10%; }
         .hero { max-width: 600px; margin-bottom: 80px; }
@@ -18,12 +18,19 @@
         .hero p { color: rgba(255,255,255,0.5); margin-top: 20px; font-size: 1.2rem; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+        /* Card Styles */
         .card { 
             background: var(--glass); backdrop-filter: blur(20px); 
             padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s;
+            transition: 0.4s; text-decoration: none; color: #fff; display: block;
         }
         .card:hover { border: 1px solid rgba(255,255,255,0.2); transform: translateY(-5px); }
+        
+        /* Non-link Card Style */
+        .card.static { cursor: default; }
+        .card.static:hover { transform: none; border: 1px solid rgba(255,255,255,0.05); }
+
         .card h3 { margin-bottom: 15px; }
         .card p { color: rgba(255,255,255,0.4); font-size: 0.9rem; line-height: 1.5; }
     </style>
@@ -44,12 +51,20 @@
             <a href="education.html" class="card"><h3>03. Education</h3><p>Academic background and trajectory in computational sciences.</p></a>
             <a href="ai_projects.html" class="card"><h3>04. AI Projects</h3><p>Deploying machine learning models, automation agents, and innovative AI solutions.</p></a>
             <a href="music.html" class="card"><h3>05. Acoustics</h3><p>Exploring the frequency of sound and audio engineering concepts.</p></a>
-            <a href="contact.html" class="card"><h3>06. System Status</h3><p>Engine: Three.js / WebGL<br>Status: Active<br>Latency: Near-Zero</p></a>
+            
+            <!-- System Status Card (Static) -->
+            <div class="card static">
+                <h3>06. System Status</h3>
+                <p>Engine: Three.js / WebGL<br>Status: Active<br>Latency: Near-Zero<br>Date: <span id="live-date"></span></p>
+            </div>
         </section>
     </div>
 
     <script>
-        // 3D ENGINE: Starfield + Glowing Core
+        // Set Date
+        document.getElementById('live-date').innerText = new Date().toLocaleDateString();
+
+        // 3D Engine
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
@@ -63,7 +78,7 @@
         const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.05, color: 0xffffff }));
         scene.add(stars);
 
-        // Glowing Core (The Blue Orb)
+        // Glowing Core
         const coreGeo = new THREE.SphereGeometry(2, 64, 64);
         const coreMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.3 });
         const core = new THREE.Mesh(coreGeo, coreMat);
