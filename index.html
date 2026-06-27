@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ratul Howlader — Infinite Space-Time Continuum</title>
+    <title>Ratul Howlader — Cosmic Odyssey</title>
     <style>
-        /* Global Minimalist Reset & Spatial Framework */
+        /* Global Reset & Pro Cinematic Environment */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #020204; /* Pure Absolute Cosmic Void */
+            background-color: #020204;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
@@ -17,48 +17,56 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            perspective: 1500px; /* Refined Real-world Focal Length */
+            perspective: 1600px; /* Golden-ratio 3D depth focal point */
         }
 
-        /* Cinema-Grade Space Time Warp Canvas */
-        canvas {
+        /* 👑 High-End Video Production Background Container */
+        .video-bg-wrapper {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
+            overflow: hidden;
             background: #010103;
         }
 
-        /* Subtle Relativistic Lens Flare Mesh */
-        .ambient-mesh {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+        .video-bg-wrapper video {
+            width: 100%; height: 100%;
+            object-fit: cover; /* Ensures real screen scale without distortion */
+            pointer-events: none;
+        }
+
+        /* 🎨 Hollywood Color-Grading & Peripheral Vignette Mask */
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(2, 2, 5, 0.2) 30%, #020205 100%),
+                        linear-gradient(180deg, rgba(2,2,5,0.4) 0%, rgba(2,2,5,0.1) 50%, rgba(2,2,5,0.6) 100%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Minimalist High-End HUD Navigation */
+        /* Minimalist Premium HUD */
         .cyber-hud {
             position: absolute;
             top: 40px; left: 50%;
             transform: translateX(-50%) translateZ(80px);
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-family: SFMono-Regular, Consolas, monospace;
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.5);
             letter-spacing: 6px;
             text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             padding: 10px 24px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             z-index: 10;
         }
 
-        /* Sophisticated Responsive Monolithic Layout */
+        /* 3D Framework Grid */
         .matrix-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -68,17 +76,18 @@
             transform-style: preserve-3d;
             z-index: 1;
             padding: 140px 0 80px 0;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
         }
 
-        /* Premium Monolithic Obsidian / Dark Titanium Cards */
+        /* ✨ Premium Frosted Obsidian Glass Cards (Isolates beautifully from the real space video) */
         .cyber-card {
-            /* High Contrast Solid Dark Base to isolate from Space Background */
-            background: #111216; 
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 50px 35px;
+            background: rgba(13, 14, 18, 0.75); /* High-contrast matte dark skin */
+            backdrop-filter: blur(40px); /* Massive Apple-style glass refraction behind the card */
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 55px 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -88,16 +97,15 @@
             color: #fff;
             position: relative;
             transform-style: preserve-3d;
-            /* Multi-layered shadows for massive architectural density */
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.04);
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Organic micro-floating motion instead of erratic waves */
+            /* Professional Micro-Floating Motion */
             animation: spatialDrift 8s ease-in-out infinite;
         }
 
-        /* Asynchronous Easing Breaks */
+        /* Asynchronous Phase Breaks */
         .c-1 { animation-delay: 0s; }
         .c-2 { animation-delay: -3.2s; }
         .c-3 { animation-delay: -1.6s; }
@@ -106,50 +114,49 @@
 
         @keyframes spatialDrift {
             0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-12px) rotateY(1deg); }
+            50% { transform: translateY(-10px) rotateY(0.8deg); }
         }
 
-        /* Ultra-Clean Micro-interactions on Hover */
+        /* Clean Micro-interactions on Hover */
         .cyber-card:hover, .cyber-card:active {
-            background: #15171e;
+            background: rgba(18, 20, 26, 0.85);
             border-color: rgba(255, 255, 255, 0.3);
             border-top-color: #ffffff;
-            box-shadow: 0 60px 100px rgba(0, 0, 0, 0.95),
-                        0 0 40px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 60px 110px rgba(0, 0, 0, 0.95),
+                        0 0 50px rgba(255, 255, 255, 0.03);
             transform: scale(1.03) translateZ(80px) !important;
             animation-play-state: paused;
         }
 
-        /* Architectural Structural ID */
+        /* Structural Design Element ID */
         .card-id {
             font-family: SFMono-Regular, Consolas, monospace;
-            font-size: 50px;
+            font-size: 55px;
             font-weight: 800;
             color: rgba(255, 255, 255, 0.02);
             position: absolute;
             top: 15px; left: 25px;
-            transform: translateZ(-10px);
+            transform: translateZ(-15px);
             pointer-events: none;
             transition: color 0.4s;
         }
         .cyber-card:hover .card-id, .cyber-card:active .card-id {
-            color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.04);
         }
 
-        /* Premium Typography Layout */
+        /* Elegant High-Contrast Typography */
         .card-title {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 600;
             letter-spacing: -0.5px;
             margin-bottom: 14px;
             color: #ffffff;
             transform: translateZ(30px);
-            transition: color 0.3s;
         }
 
         .card-desc {
             font-size: 12px;
-            color: #66666e;
+            color: rgba(255, 255, 255, 0.4);
             font-family: SFMono-Regular, Consolas, monospace;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -160,20 +167,20 @@
             color: #ffffff;
         }
 
-        /* Social Connection Hub Minimal Panel */
+        /* Social Connection Panels */
         .social-hub {
             display: flex;
             gap: 12px;
-            margin-top: 20px;
-            transform: translateZ(40px);
+            margin-top: 22px;
+            transform: translateZ(45px);
             flex-wrap: wrap;
             justify-content: center;
             max-width: 340px;
         }
 
         .social-link-btn {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-family: SFMono-Regular, Consolas, monospace;
             font-size: 11px;
@@ -189,33 +196,43 @@
         .social-link-btn:hover {
             background: #ffffff;
             color: #020204;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
         }
 
         /* Fluid Mobile Breakpoints */
         @media (max-width: 650px) {
             .matrix-container { gap: 24px; padding-top: 120px; }
-            .cyber-card { padding: 40px 24px; }
-            .card-title { font-size: 21px; }
+            .cyber-card { padding: 45px 24px; }
+            .card-title { font-size: 22px; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="warpCanvas"></canvas>
-    <div class="ambient-mesh" id="meshGlow"></div>
+    <!-- 🎥 Production-Grade Cinematic Background Video Loop -->
+    <div class="video-bg-wrapper">
+        <!-- নিচে একটি স্ট্যাবল প্রিমিয়াম মোশন স্পেস ভিডিওর লিংক দেওয়া আছে। তুমি চাইলে তোমার নিজস্ব ডাউনলোড করা ৪K 'space.mp4' ফাইল দিয়ে এই URL টি রিপ্লেস করে নিতে পারো -->
+        <video autoplay loop muted playsinline id="spaceVideo">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-background-1611-large.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
 
+    <!-- HUD Core Element -->
     <div class="cyber-hud" id="hud-date">CHRONO UNIT // SYNCING</div>
 
+    <!-- 3D Matrix Framework Grid -->
     <div class="matrix-container" id="space-grid">
         
+        <!-- 01. About Me -->
         <a href="about.html" class="cyber-card c-1">
             <span class="card-id">01</span>
             <div class="card-title">About Me</div>
             <div class="card-desc">Identity & Core</div>
         </a>
 
+        <!-- 02. Connect -->
         <div class="cyber-card c-2">
             <span class="card-id">02</span>
             <div class="card-title">Connect</div>
@@ -229,18 +246,21 @@
             </div>
         </div>
 
+        <!-- 03. Education -->
         <a href="education.html" class="cyber-card c-3">
             <span class="card-id">03</span>
             <div class="card-title">Education</div>
             <div class="card-desc">Academic Timeline</div>
         </a>
 
+        <!-- 04. AI Projects -->
         <a href="ai_projects.html" class="cyber-card c-4">
             <span class="card-id">04</span>
             <div class="card-title">AI Projects</div>
             <div class="card-desc">Intelligence Labs</div>
         </a>
 
+        <!-- 05. Music Bands -->
         <a href="music.html" class="cyber-card c-5">
             <span class="card-id">05</span>
             <div class="card-title">Music Bands</div>
@@ -254,118 +274,40 @@
         const dateObj = new Date();
         document.getElementById('hud-date').innerText = `CHRONO CORE // ${dateObj.toISOString().split('T')[0].replace(/-/g, '.')}`;
 
-        // Smooth Physics Matrix Interactivity Engine
+        // 🧠 Top-Coder Lerp Physics Interactivity Script (Interpolates raw snaps for buttery 3D motion)
         const grid = document.getElementById('space-grid');
-        const glow = document.getElementById('meshGlow');
+        const video = document.getElementById('spaceVideo');
         
         let targetX = 0, targetY = 0;
         let currentX = 0, currentY = 0;
-        let targetSpeed = 1;
-        let currentSpeed = 1;
 
         document.addEventListener('mousemove', (e) => {
-            // Relational positioning calculations for 3D grid tilt
+            // Relational matrix calculations
             targetX = (window.innerWidth / 2 - e.pageX) / 55;
             targetY = (window.innerHeight / 2 - e.pageY) / 55;
-
-            // Fluid UI Lens Calculations
-            const xPercent = (e.clientX / window.innerWidth) * 100;
-            const yPercent = (e.clientY / window.innerHeight) * 100;
-            glow.style.setProperty('--mouse-x', `${xPercent}%`);
-            glow.style.setProperty('--mouse-y', `${yPercent}%`);
-
-            targetSpeed = 7; // Warp speed increases under gravitational velocity (mouse motion)
+            
+            // Video Playback speed ramps up slightly based on user interaction velocity (Creative Director touch)
+            if(video) video.playbackRate = 1.6;
         });
 
         document.addEventListener('mouseleave', () => {
             targetX = 0;
             targetY = 0;
-            targetSpeed = 1;
+            if(video) video.playbackRate = 1.0;
         });
 
-        // 3D Relativistic Hyperdrive Starfield Simulation (Strict Depth Projection Geometry)
-        const canvas = document.getElementById("warpCanvas");
-        const ctx = canvas.getContext("2d");
-
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        setCanvasSize();
-
-        let stars = [];
-        const numStars = 250; // Perfectly balanced celestial density
-        const fov = 400; // Realistic mathematical field of view
-
-        for (let i = 0; i < numStars; i++) {
-            stars.push({
-                x: Math.random() * canvas.width * 2 - canvas.width,
-                y: Math.random() * canvas.height * 2 - canvas.height,
-                z: Math.random() * canvas.width,
-                brightness: Math.random() * 0.4 + 0.6 // Eliminating raw blinding whites
-            });
-        }
-
-        function animateWarp() {
-            // Inertial interpolations for buttery smooth motion blur & lag-free stabilization
+        // Loop animation applying the mathematical linear interpolation (lerp)
+        function smoothRender() {
+            // Formula: current = current + (target - current) * easing_factor
             currentX += (targetX - currentX) * 0.08;
             currentY += (targetY - currentY) * 0.08;
-            currentSpeed += (targetSpeed - currentSpeed) * 0.05;
 
             grid.style.transform = `rotateY(${-currentX}deg) rotateX(${currentY}deg)`;
-
-            // Deep Space Black with a very low alpha trail multiplier for cinematic organic stretch
-            ctx.fillStyle = 'rgba(2, 2, 4, 0.12)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            const cx = canvas.width / 2;
-            const cy = canvas.height / 2;
-
-            for (let i = 0; i < stars.length; i++) {
-                let star = stars[i];
-                
-                let old_z = star.z;
-                star.z -= currentSpeed * 2.8; // Relativistic structural displacement
-
-                // Boundaries reset mapping to endless loop recursion
-                if (star.z <= 0) {
-                    star.z = canvas.width;
-                    star.x = Math.random() * canvas.width * 2 - cx;
-                    star.y = Math.random() * canvas.height * 2 - cy;
-                    old_z = star.z;
-                }
-
-                // Complex Math Spatial Projection mapping coordinates from 3D space vectors into 2D screenspace
-                let px = (star.x / star.z) * fov + cx;
-                let py = (star.y / star.z) * fov + cy;
-                
-                let opx = (star.x / old_z) * fov + cx;
-                let opy = (star.y / old_z) * fov + cy;
-
-                // Fading luminosity vector according to relative scale (z-depth)
-                let alpha = (1 - star.z / canvas.width) * star.brightness;
-                let strokeSize = (1 - star.z / canvas.width) * 2;
-
-                if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
-                    // Soft high-end organic cosmic white/ice blue mix instead of solid neon
-                    ctx.strokeStyle = `rgba(235, 245, 255, ${alpha})`;
-                    ctx.lineWidth = strokeSize;
-                    ctx.lineCap = "round";
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(opx, opy);
-                    ctx.lineTo(px, py);
-                    ctx.stroke();
-                }
-            }
-            requestAnimationFrame(animateWarp);
+            
+            requestAnimationFrame(smoothRender);
         }
-
-        window.addEventListener('resize', () => {
-            setCanvasSize();
-        });
-
-        animateWarp();
+        
+        smoothRender();
     </script>
 </body>
 </html>
