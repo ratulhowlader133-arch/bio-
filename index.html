@@ -20,15 +20,31 @@
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
         .card { 
             background: var(--glass); backdrop-filter: blur(20px); 
             padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
             transition: 0.4s; text-decoration: none; color: #fff; display: block;
+            animation: float 6s ease-in-out infinite; /* Floating Effect */
         }
-        .card:hover { border: 1px solid rgba(255,255,255,0.2); transform: translateY(-5px); }
+        
+        /* Staggered delay for organic feel */
+        .card:nth-child(2) { animation-delay: 0.5s; }
+        .card:nth-child(3) { animation-delay: 1s; }
+        .card:nth-child(4) { animation-delay: 1.5s; }
+        .card:nth-child(5) { animation-delay: 2s; }
+        .card:nth-child(6) { animation-delay: 2.5s; }
+
+        .card:hover { border: 1px solid rgba(255,255,255,0.2); transform: translateY(-5px) !important; animation-play-state: paused; }
         
         .card.static { cursor: default; }
-        .card.static:hover { transform: none; border: 1px solid rgba(255,255,255,0.05); }
+        .card.static:hover { border: 1px solid rgba(255,255,255,0.05); }
 
         .card h3 { margin-bottom: 15px; }
         .card p { color: rgba(255,255,255,0.4); font-size: 0.9rem; line-height: 1.5; }
@@ -52,7 +68,6 @@
             <a href="ai_projects.html" class="card"><h3>04. AI Projects</h3><p>Deploying machine learning models, automation agents, and innovative AI solutions.</p></a>
             <a href="music.html" class="card"><h3>05. Acoustics</h3><p>Exploring the frequency of sound and audio engineering concepts.</p></a>
             
-            <!-- System Status Card -->
             <div class="card static">
                 <h3>06. System Status</h3>
                 <p>Engine: Three.js / WebGL<br>Status: Active<br>Latency: Near-Zero<br>Date: <span id="live-date"></span></p>
@@ -61,10 +76,8 @@
     </div>
 
     <script>
-        // Live Date
         document.getElementById('live-date').innerText = new Date().toLocaleDateString();
 
-        // 3D Animation Engine
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
